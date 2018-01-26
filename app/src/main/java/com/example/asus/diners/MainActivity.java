@@ -2,9 +2,13 @@ package com.example.asus.diners;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.example.asus.diners.Model.Dish;
+import com.example.asus.diners.Model.DishPlace;
 import com.example.asus.diners.Model.Person;
+import com.example.asus.diners.Model.Place;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
@@ -48,4 +52,49 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private String id = "";
+
+    SaveListener<String> general = new SaveListener<String>() {
+        @Override
+        public void done(String objectId, BmobException e) {
+            if(e==null){
+                Log.v("MAINACTIVITY" , "添加数据成功，返回objectId为：" + objectId );
+                id = objectId;
+                //Toast.makeText(MainActivity.this , "添加数据成功，返回objectId为：" + objectId , Toast.LENGTH_SHORT).show();
+            }else{
+                Log.v("MAINACTIVITY" , "创建数据失败：" + e.getMessage() );
+                // Toast.makeText(MainActivity.this , "创建数据失败：" + e.getMessage() , Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+
+    //测试Java bean是否正确
+    private void newTest(){
+        Dish blackRice = new Dish("黑米粥");
+        blackRice.setType("粥汤");
+        blackRice.save(general);
+        blackRice.setObjectId(id);
+        Place peach = new Place("桃园");
+        Place hui = new Place("荟园");
+        Place bo = new Place("博园");
+        peach.save(general);
+        peach.setObjectId(id);
+        hui.save(general);
+        hui.setObjectId(id);
+        bo.save(general);
+        bo.setObjectId(id);
+
+        DishPlace dp1 = new DishPlace(blackRice , peach , new Float(2));
+        DishPlace dp2 = new DishPlace(blackRice , hui , new Float(1.5));
+        DishPlace dp3 = new DishPlace(blackRice , bo , new Float(2));
+
+        //要再次查询出来才是完整的对象
+        dp1.save(general);
+        dp2.save(general);
+        dp3.save(general);
+    }
+
+
 }
