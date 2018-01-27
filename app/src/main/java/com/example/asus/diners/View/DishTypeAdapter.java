@@ -16,6 +16,8 @@ import java.util.List;
  * Created by asus on 2018/1/27.
  */
 
+//菜品类型的recyclerview的adapter
+
 public class DishTypeAdapter extends RecyclerView.Adapter<DishTypeAdapter.ViewHolder> {
 
     private List<DishType> list;

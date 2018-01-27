@@ -12,6 +12,8 @@ import com.example.asus.diners.R;
  * Created by asus on 2018/1/27.
  */
 
+//菜品性质的recyclerview的Adapter
+
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
 
     private String[] list;
