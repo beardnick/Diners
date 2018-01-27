@@ -22,20 +22,24 @@ public class DishTypeAdapter extends RecyclerView.Adapter<DishTypeAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_layout , parent , false);
+        ViewHolder holder = new ViewHolder(view);
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        // TODO: 2018/1/27 学习怎样从BmobFile得到图片
+        list.get(position).getImage();
+        holder.type.setText(list.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView type;
         ImageView image;
