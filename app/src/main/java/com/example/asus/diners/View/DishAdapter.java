@@ -1,9 +1,15 @@
 package com.example.asus.diners.View;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -11,7 +17,12 @@ import android.widget.TextView;
 import com.example.asus.diners.Model.Dish;
 import com.example.asus.diners.R;
 
+import java.io.File;
 import java.util.ArrayList;
+
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.DownloadFileListener;
 
 /**
  * Created by asus on 2018/1/29.
@@ -20,6 +31,8 @@ import java.util.ArrayList;
 public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
     
     private ArrayList<Dish> list;
+    private static final String TAG = "DishAdapter";
+    private Context mContext;
 
     public DishAdapter(ArrayList<Dish> list) {
         this.list = list;
@@ -35,6 +48,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        mContext = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dish_layout , parent , false );
         ViewHolder holder = new ViewHolder(view);
         return holder;
@@ -42,7 +56,34 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        // TODO: 2018/1/31 解决Bmob图片加载问题 
+       Dish dish = list.get(position);
+       holder.dishName.setText(dish.getName());
+        // TODO: 2018/1/31 为什么只能用final而且还是数组
+        final Bitmap[] image = new Bitmap[1];
+       dish.getPic().download(new DownloadFileListener() {
+           @Override
+           public void done(String s, BmobException e) {
+               if(e == null){
+                   Log.v(TAG , "下载成功，保存路径：" + s);
+                   image[0] = BitmapFactory.decodeFile(s);
+               }else {
+                   Log.v(TAG , "下载失败" + e.getMessage());
+                   image[0] = null;
+               }
+           }
+           @Override
+           public void onProgress(Integer integer, long l) {
+           }
+       });
+       if(image == null){
+           holder.dishImage.setImageResource(R.mipmap.dish);
+       }else{
+           holder.dishImage.setImageBitmap(image[0]);
+       }
+       holder.star = new LinearLayout(mContext);
+       ImageView star = new ImageView(mContext);
+       star.setImageResource(R.drawable.ic_star_black_24dp);
+       star.setBackgroundColor(mContext.getResources().getColor(R.color.colorAccent));
     }
 
     @Override
