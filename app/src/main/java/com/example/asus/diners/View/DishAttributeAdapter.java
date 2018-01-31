@@ -14,7 +14,7 @@ import com.example.asus.diners.R;
 
 //菜品性质的recyclerview的Adapter
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
+public class DishAttributeAdapter extends RecyclerView.Adapter<DishAttributeAdapter.ViewHolder>{
 
     private String[] list;
 
@@ -27,7 +27,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         }
     }
 
-    public Adapter(String[] list) {
+    public DishAttributeAdapter(String[] list) {
         this.list = list;
     }
 
@@ -39,7 +39,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(DishAttributeAdapter.ViewHolder holder, int position) {
         holder.attribute.setText(list[position]);
     }
 

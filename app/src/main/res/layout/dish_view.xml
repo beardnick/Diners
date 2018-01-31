@@ -3,4 +3,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/dish_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@mipmap/dish"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/dish_image"
+        android:gravity="center"
+        android:text="test"/>
+
+    <LinearLayout
+        android:id="@+id/star"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_below="@+id/name"
+        android:layout_toEndOf="@+id/dish_image"
+        android:layout_alignBottom="@id/dish_image"
+        android:orientation="horizontal">
+    </LinearLayout>
+
+
 </RelativeLayout>
