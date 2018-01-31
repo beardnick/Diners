@@ -49,13 +49,14 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mContext = parent.getContext();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dish_layout , parent , false );
+        //inflate()的第一个参数是指每个item的view
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dish_view , parent , false );
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
        Dish dish = list.get(position);
        holder.dishName.setText(dish.getName());
         // TODO: 2018/1/31 为什么只能用final而且还是数组
@@ -66,6 +67,12 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
                if(e == null){
                    Log.v(TAG , "下载成功，保存路径：" + s);
                    image[0] = BitmapFactory.decodeFile(s);
+                   if(image[0] == null){
+                       Log.v(TAG , "image is null");
+                       holder.dishImage.setImageResource(R.mipmap.dish);
+                   }else{
+                       holder.dishImage.setImageBitmap(image[0]);
+                   }
                }else {
                    Log.v(TAG , "下载失败" + e.getMessage());
                    image[0] = null;
@@ -75,19 +82,16 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
            public void onProgress(Integer integer, long l) {
            }
        });
-       if(image == null){
-           holder.dishImage.setImageResource(R.mipmap.dish);
-       }else{
-           holder.dishImage.setImageBitmap(image[0]);
-       }
        holder.star = new LinearLayout(mContext);
        ImageView star = new ImageView(mContext);
        star.setImageResource(R.drawable.ic_star_black_24dp);
        star.setBackgroundColor(mContext.getResources().getColor(R.color.colorAccent));
+       holder.star.addView(star);
     }
 
     @Override
     public int getItemCount() {
+        Log.v(TAG , "添加成功，共：" + list.size() + " 条数据");
         return list.size();
     }
     
@@ -98,7 +102,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
 
         public ViewHolder(View itemView) {
             super(itemView);
-            dishImage = (ImageView) itemView.findViewById(R.id.image);
+            dishImage = (ImageView) itemView.findViewById(R.id.dish_image);
             dishName = (TextView) itemView.findViewById(R.id.name);
             star = (LinearLayout) itemView.findViewById(R.id.star);
         }
