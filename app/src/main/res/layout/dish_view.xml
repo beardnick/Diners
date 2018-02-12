@@ -20,16 +20,16 @@
         android:text="test"
         android:layout_marginLeft="30dp"/>
 
-    <LinearLayout
+    <RatingBar
         android:id="@+id/star"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_below="@id/name"
+        android:numStars="5"
         android:layout_toEndOf="@id/dish_image"
         android:layout_alignBottom="@id/dish_image"
-        android:orientation="horizontal"
         android:layout_marginLeft="30dp">
-    </LinearLayout>
+    </RatingBar>
 
 
 </RelativeLayout>

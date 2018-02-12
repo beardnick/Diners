@@ -82,16 +82,15 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
            public void onProgress(Integer integer, long l) {
            }
        });
-       holder.star = new LinearLayout(mContext);
-       ImageView star = new ImageView(mContext);
-       star.setImageResource(R.drawable.ic_star_black_24dp);
-       star.setBackgroundColor(mContext.getResources().getColor(R.color.colorAccent));
-       holder.star.addView(star);
+//       holder.star = new LinearLayout(mContext);
+//       ImageView star = new ImageView(mContext);
+//       star.setImageResource(R.drawable.ic_star_black_24dp);
+//       star.setBackgroundColor(mContext.getResources().getColor(R.color.colorAccent));
+//       holder.star.addView(star);
     }
 
     @Override
     public int getItemCount() {
-        Log.v(TAG , "添加成功，共：" + list.size() + " 条数据");
         return list.size();
     }
     
