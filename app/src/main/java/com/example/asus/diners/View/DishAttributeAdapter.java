@@ -23,7 +23,7 @@ public class DishAttributeAdapter extends RecyclerView.Adapter<DishAttributeAdap
         TextView attribute;
         public ViewHolder(View itemView) {
             super(itemView);
-            this.attribute = (TextView) itemView.findViewById(R.id.attribute);
+            this.attribute = (TextView) itemView.findViewById(R.id.dish_attribute_item);
         }
     }
 
@@ -33,7 +33,7 @@ public class DishAttributeAdapter extends RecyclerView.Adapter<DishAttributeAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_layout , parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dish_attribute_view , parent , false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }

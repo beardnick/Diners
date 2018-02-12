@@ -24,7 +24,7 @@ public class DishTypeAdapter extends RecyclerView.Adapter<DishTypeAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_layout , parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dish_type_view, parent , false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -48,8 +48,8 @@ public class DishTypeAdapter extends RecyclerView.Adapter<DishTypeAdapter.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
-            this.type = (TextView) itemView.findViewById(R.id.type);
-            this.image = (ImageView) itemView.findViewById(R.id.type_image);
+            this.type = (TextView) itemView.findViewById(R.id.dish_type_item);
+            this.image = (ImageView) itemView.findViewById(R.id.type_image_item);
         }
     }
 
