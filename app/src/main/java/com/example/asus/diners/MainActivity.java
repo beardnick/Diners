@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import cn.bmob.v3.listener.SaveListener;
 public class MainActivity extends AppCompatActivity {
 
     private List<DishType>dishTypeList=new ArrayList<>();
+    private SearchView mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,42 +51,8 @@ public class MainActivity extends AppCompatActivity {
         .setFileExpiration(2500)
         .build();
         Bmob.initialize(config);
+        onBindView();
     }
-
-    //测试是否能成功导入数据
-    public void test(){
-        Person p2 = new Person();
-        p2.setName("lucky");
-        p2.setAddress("北京海淀");
-        p2.save(new SaveListener<String>() {
-            @Override
-            public void done(String objectId,BmobException e) {
-                if(e==null){
-                    Toast.makeText(MainActivity.this , "添加数据成功，返回objectId为：" + objectId , Toast.LENGTH_SHORT).show();
-                }else{
-                   Toast.makeText(MainActivity.this , "创建数据失败：" + e.getMessage() , Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    private String id = "";
-
-    SaveListener<String> general = new SaveListener<String>() {
-        @Override
-        public void done(String objectId, BmobException e) {
-            if(e==null){
-                Log.v("MAINACTIVITY" , "添加数据成功，返回objectId为：" + objectId );
-                id = objectId;
-                //Toast.makeText(MainActivity.this , "添加数据成功，返回objectId为：" + objectId , Toast.LENGTH_SHORT).show();
-            }else{
-                Log.v("MAINACTIVITY" , "创建数据失败：" + e.getMessage() );
-                // Toast.makeText(MainActivity.this , "创建数据失败：" + e.getMessage() , Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
-
-
 
     private void initDishType(){
         for(int i=0;i<7;i++){
@@ -96,31 +64,9 @@ public class MainActivity extends AppCompatActivity {
             dishTypeList.add(warm_dinner);
         }
     }
-    //测试Java bean是否正确
-    private void newTest(){
-        Dish blackRice = new Dish("黑米粥");
-        blackRice.setType("粥汤");
-        blackRice.save(general);
-        blackRice.setObjectId(id);
-        Place peach = new Place("桃园");
-        Place hui = new Place("荟园");
-        Place bo = new Place("博园");
-        peach.save(general);
-        peach.setObjectId(id);
-        hui.save(general);
-        hui.setObjectId(id);
-        bo.save(general);
-        bo.setObjectId(id);
 
-        DishPlace dp1 = new DishPlace(blackRice , peach , new Float(2));
-        DishPlace dp2 = new DishPlace(blackRice , hui , new Float(1.5));
-        DishPlace dp3 = new DishPlace(blackRice , bo , new Float(2));
-
-        //要再次查询出来才是完整的对象
-        dp1.save(general);
-        dp2.save(general);
-        dp3.save(general);
+    private void onBindView(){
+        mSearchView = (SearchView) findViewById(R.id.search);
+        mSearchView.setSubmitButtonEnabled(true);
     }
-
-
 }
