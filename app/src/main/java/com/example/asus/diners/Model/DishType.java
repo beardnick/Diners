@@ -10,6 +10,7 @@ import cn.bmob.v3.datatype.BmobRelation;
 
 public class DishType extends BmobObject {
 
+
     private String name;
 
     private int imageid;
