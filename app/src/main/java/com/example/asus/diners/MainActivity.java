@@ -1,5 +1,7 @@
 package com.example.asus.diners;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -67,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void onBindView(){
         mSearchView = (SearchView) findViewById(R.id.search);
+        SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        mSearchView.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
         mSearchView.setSubmitButtonEnabled(true);
     }
 }

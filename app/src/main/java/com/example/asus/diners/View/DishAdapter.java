@@ -60,15 +60,15 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
     public void onBindViewHolder(final ViewHolder holder, int position) {
        Dish dish = list.get(position);
        holder.dishName.setText(dish.getName());
-        // TODO: 2018/1/31 为什么只能用final而且还是数组
         Bitmap image = DataBaseUtil.getImage(dish.getPic());
-        if(image != null){
+        if(image != null) {
             holder.dishImage.setImageBitmap(image);
         }
     }
 
     @Override
     public int getItemCount() {
+        Log.v(TAG , "列表大小：" +list.size());
         return list.size();
     }
     
