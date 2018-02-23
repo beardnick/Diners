@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.asus.diners.Model.Dish;
 import com.example.asus.diners.R;
+import com.example.asus.diners.Utils.DataBaseUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -60,33 +61,10 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
        Dish dish = list.get(position);
        holder.dishName.setText(dish.getName());
         // TODO: 2018/1/31 为什么只能用final而且还是数组
-        final Bitmap[] image = new Bitmap[1];
-       dish.getPic().download(new DownloadFileListener() {
-           @Override
-           public void done(String s, BmobException e) {
-               if(e == null){
-                   Log.v(TAG , "下载成功，保存路径：" + s);
-                   image[0] = BitmapFactory.decodeFile(s);
-                   if(image[0] == null){
-                       Log.v(TAG , "image is null");
-                       holder.dishImage.setImageResource(R.mipmap.dish);
-                   }else{
-                       holder.dishImage.setImageBitmap(image[0]);
-                   }
-               }else {
-                   Log.v(TAG , "下载失败" + e.getMessage());
-                   image[0] = null;
-               }
-           }
-           @Override
-           public void onProgress(Integer integer, long l) {
-           }
-       });
-//       holder.star = new LinearLayout(mContext);
-//       ImageView star = new ImageView(mContext);
-//       star.setImageResource(R.drawable.ic_star_black_24dp);
-//       star.setBackgroundColor(mContext.getResources().getColor(R.color.colorAccent));
-//       holder.star.addView(star);
+        Bitmap image = DataBaseUtil.getImage(dish.getPic());
+        if(image != null){
+            holder.dishImage.setImageBitmap(image);
+        }
     }
 
     @Override
