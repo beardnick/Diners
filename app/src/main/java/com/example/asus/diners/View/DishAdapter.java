@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.asus.diners.Model.Dish;
@@ -60,10 +61,8 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
     public void onBindViewHolder(final ViewHolder holder, int position) {
        Dish dish = list.get(position);
        holder.dishName.setText(dish.getName());
-        Bitmap image = DataBaseUtil.getImage(dish.getPic());
-        if(image != null) {
-            holder.dishImage.setImageBitmap(image);
-        }
+       DataBaseUtil.setImage(dish.getPic() , holder.dishImage);
+        holder.star.setRating(4);
     }
 
     @Override
@@ -75,13 +74,13 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView dishImage;
         TextView dishName;
-        LinearLayout star;
+        RatingBar star;
 
         public ViewHolder(View itemView) {
             super(itemView);
             dishImage = (ImageView) itemView.findViewById(R.id.dish_image);
             dishName = (TextView) itemView.findViewById(R.id.name);
-            star = (LinearLayout) itemView.findViewById(R.id.star);
+            star = (RatingBar) itemView.findViewById(R.id.star);
         }
     }
 }

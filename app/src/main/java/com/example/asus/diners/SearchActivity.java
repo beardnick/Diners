@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
-    private DishAdapter mAdapter;
+    private DishAdapter mAdapter = new DishAdapter(new ArrayList<Dish>());
     public static final String TAG = "SearchActivity";
 
 
@@ -30,20 +30,34 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.dish_layout);
         createView();
         receiveSearch();
+
     }
 
     public void createView(){
         mRecyclerView = (RecyclerView) findViewById(R.id.dish);
         LinearLayoutManager manager = new LinearLayoutManager(SearchActivity.this  );
         mRecyclerView.setLayoutManager(manager);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     public void receiveSearch(){
         Intent intent = getIntent();
         if(Intent.ACTION_SEARCH.equals(intent.getAction())){
             String queryString = intent.getStringExtra(SearchManager.QUERY);
-            mAdapter = new DishAdapter(DataBaseUtil.searchDish(queryString));
-            mRecyclerView.setAdapter(mAdapter);
+            DataBaseUtil.searchDish(queryString , mAdapter);
         }
     }
+
+//    public void receiveSearch(){
+//        Intent intent = getIntent();
+//        if(intent.ACTION_SEARCH.equals(intent.getAction())){
+//            ArrayList<Dish> list = new ArrayList<>();
+//            for(int i = 0 ; i < 10 ; i ++){
+//                list.add(new Dish("dish" + i));
+//            }
+//            mAdapter = new DishAdapter(list);
+//            mRecyclerView.setAdapter(mAdapter);
+//        }
+//
+//    }
 }
