@@ -14,8 +14,8 @@ public class Comment extends BmobObject {
     //内容
     private String content;
 
-    //评分
-    private Integer score;
+    //评分,为0 1 2 3 4 5
+    private Float score;
 
     public Comment(Dish dish , String content) {
         super();
@@ -39,11 +39,14 @@ public class Comment extends BmobObject {
         this.content = content;
     }
 
-    public Integer getScore() {
+
+    public Float getScore() {
+        if(score == null || score < 0 || score > 5)return 0f;
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(Float score) {
+        if(score >= 0 && score <= 5)
         this.score = score;
     }
 }

@@ -41,6 +41,10 @@
                 android:resource="@xml/search_config">
             </meta-data>
         </activity>
+        <provider
+            android:authorities="com.example.dinners.provider"
+            android:name=".View.MyCustomSuggestionProvider">
+        </provider>
     </application>
 
 </manifest>

@@ -62,7 +62,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
        Dish dish = list.get(position);
        holder.dishName.setText(dish.getName());
        DataBaseUtil.setImage(dish.getPic() , holder.dishImage);
-        holder.star.setRating(4);
+       DataBaseUtil.setScore(dish , holder.star);
     }
 
     @Override

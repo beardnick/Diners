@@ -4,17 +4,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 
+import com.example.asus.diners.Model.Comment;
 import com.example.asus.diners.Model.Dish;
 import com.example.asus.diners.View.DishAdapter;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.DownloadFileListener;
 import cn.bmob.v3.listener.FindListener;
@@ -84,5 +82,31 @@ public class DataBaseUtil{
                     adapter.notifyDataSetChanged();
                 }
             });
+    }
+
+    public static void setScore(Dish dish , final RatingBar score){
+        BmobQuery<Comment> query = new BmobQuery<>();
+        query.addQueryKeys("score");
+        query.addWhereEqualTo("dish" , new BmobPointer(dish));
+        query.findObjects(new FindListener<Comment>() {
+            @Override
+            public void done(List<Comment> list, BmobException e) {
+                if(e == null){
+                    if(list.size() == 0){
+                        score.setRating(0);
+                    }else {
+                        Float sum = 0f;
+                        for(Comment x : list){
+                            sum += x.getScore();
+                        }
+                        score.setRating(sum / list.size());
+                    }
+                    Log.v(TAG , "获取分数成功");
+                }else {
+                    score.setRating(0);
+                    Log.v(TAG , "获取分数失败" + e.getMessage());
+                }
+            }
+        });
     }
 }

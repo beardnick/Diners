@@ -12,18 +12,44 @@
         />
 
 
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/dish_attribute"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/search"-->
-        <!--android:layout_alignParentStart="true"/>-->
+    <GridLayout
+        android:id="@+id/dish_attribute_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/search">
 
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/dish_type"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_below="@id/dish_attribute"/>-->
+        <Button
+            android:id="@+id/littleeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="小吃" />
+
+        <Button
+            android:id="@+id/ricedish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="米饭套餐" />
+
+        <Button
+            android:id="@+id/noodles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="面食" />
+
+        <Button
+            android:id="@+id/porridge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="粥汤" />
+
+        <Button
+            android:id="@+id/hotpot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="火锅" />
+
+    </GridLayout>
 
     <GridLayout
         android:id="@+id/dish_type_button"
@@ -78,43 +104,5 @@
             android:drawableTop="@drawable/support"/>
     </GridLayout>
 
-    <GridLayout
-        android:id="@+id/dish_attribute_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/search">
-
-        <Button
-            android:id="@+id/littleeat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="小吃" />
-
-        <Button
-            android:id="@+id/ricedish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="米饭套餐" />
-
-        <Button
-            android:id="@+id/noodles"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="面食" />
-
-        <Button
-            android:id="@+id/porridge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="粥汤" />
-
-        <Button
-            android:id="@+id/hotpot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="火锅" />
-
-    </GridLayout>
 
 </RelativeLayout>

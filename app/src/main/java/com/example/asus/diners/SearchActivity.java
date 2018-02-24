@@ -47,17 +47,4 @@ public class SearchActivity extends AppCompatActivity {
             DataBaseUtil.searchDish(queryString , mAdapter);
         }
     }
-
-//    public void receiveSearch(){
-//        Intent intent = getIntent();
-//        if(intent.ACTION_SEARCH.equals(intent.getAction())){
-//            ArrayList<Dish> list = new ArrayList<>();
-//            for(int i = 0 ; i < 10 ; i ++){
-//                list.add(new Dish("dish" + i));
-//            }
-//            mAdapter = new DishAdapter(list);
-//            mRecyclerView.setAdapter(mAdapter);
-//        }
-//
-//    }
 }

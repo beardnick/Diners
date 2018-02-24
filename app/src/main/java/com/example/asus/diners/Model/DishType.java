@@ -13,9 +13,7 @@ public class DishType extends BmobObject {
 
     private String name;
 
-    private int imageid;
-
-    BmobRelation belong;
+    private BmobRelation belong;
 
     private BmobFile image;
 
@@ -27,19 +25,14 @@ public class DishType extends BmobObject {
         this.image = image;
     }
 
-    public DishType(String name,int imageid) {
+    public DishType(String name) {
         super();
         this.name = name;
-        this.imageid=imageid;
     }
 
     public String getName() {
 
         return name;
-    }
-
-    public int getImageid(){
-        return imageid;
     }
 
     public void setName(String name) {
