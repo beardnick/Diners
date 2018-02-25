@@ -1,6 +1,7 @@
 package com.example.asus.diners.Model;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobFile;
@@ -18,6 +19,7 @@ public class Dish extends BmobObject{
     //不要乱改名字，这些名字是和云端的数据库绑定的
     private BmobFile pic;
     private String imagePath;
+    private Bitmap imageBitmap;
     //口味
     private String taste;
     //卡路里
@@ -65,6 +67,14 @@ public class Dish extends BmobObject{
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public Bitmap getImageBitmap() {
+        return imageBitmap;
+    }
+
+    public void setImageBitmap(Bitmap imageBitmap) {
+        this.imageBitmap = imageBitmap;
     }
 
     public String getTaste() {

@@ -31,6 +31,7 @@ public class DataBaseUtil{
                 if(e == null){
                     Log.v(TAG , "下载成功，保存路径：" + s);
                     dish.setImagePath(s);
+                    dish.setImageBitmap(setImage(s));
                     imageView.setImageBitmap(setImage(s));
                 }else {
                     Log.v(TAG , "下载失败" + e.getMessage());
@@ -54,6 +55,7 @@ public class DataBaseUtil{
     //因为查询是在子线程中执行的，还没得到list就已经返回了
     public static void searchDish(String queryString , final DishAdapter adapter){
         final BmobQuery<Dish> query = new BmobQuery<>();
+        query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
         final char[] queryChars = queryString.toCharArray();
         for(char x : queryChars)Log.v( TAG , String.valueOf(x));
             query.findObjects(new FindListener<Dish>() {

@@ -59,7 +59,10 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
            @Override
            public void onClick(View v) {
                Intent intent = new Intent(mContext , DishActivity.class);
-               intent.putExtra("dish_path" ,dish.getImagePath());
+              // intent.putExtra("dish_path" ,dish.getImagePath());
+               // TODO: 2018/2/25 弄懂为啥会出现runtime exception 
+              // intent.putExtra("dish" ,dish);
+               intent.putExtra("dish_id" , dish.getObjectId());
                mContext.startActivity(intent);
            }
        });
