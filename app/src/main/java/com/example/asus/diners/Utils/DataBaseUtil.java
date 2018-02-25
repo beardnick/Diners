@@ -11,7 +11,6 @@ import com.example.asus.diners.Model.Dish;
 import com.example.asus.diners.View.DishAdapter;
 import java.util.List;
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.DownloadFileListener;
@@ -24,14 +23,15 @@ import cn.bmob.v3.listener.FindListener;
 public class DataBaseUtil{
     private static final String TAG = "DataBaseUtil";
 
-    public static  void setImage(BmobFile file , final Dish dish){
-        if(file == null)return;
-        file.download(new DownloadFileListener(){
+    public static void setImage(final Dish dish , final ImageView imageView){
+        if(dish.getPic() == null)return;
+        dish.getPic().download(new DownloadFileListener(){
             @Override
             public void done(String s, BmobException e) {
                 if(e == null){
                     Log.v(TAG , "下载成功，保存路径：" + s);
-                    dish.setImageBitmap(BitmapFactory.decodeFile(s));
+                    dish.setImagePath(s);
+                    imageView.setImageBitmap(setImage(s));
                 }else {
                     Log.v(TAG , "下载失败" + e.getMessage());
                 }
@@ -42,7 +42,7 @@ public class DataBaseUtil{
         });
     }
 
-    public static Bitmap getImage(String path){
+    public static Bitmap setImage(String path){
         Bitmap image = BitmapFactory.decodeFile(path);
         if(image == null){
             Log.v(TAG , "路径无效");

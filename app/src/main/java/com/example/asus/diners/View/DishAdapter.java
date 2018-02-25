@@ -53,15 +53,13 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
     public void onBindViewHolder(final ViewHolder holder, int position) {
        final Dish dish = list.get(position);
        holder.dishName.setText(dish.getName());
-       DataBaseUtil.setImage(dish.getImage() , dish);
-       if(dish.getImageBitmap() != null)
-       holder.dishImage.setImageBitmap(dish.getImageBitmap());
+       DataBaseUtil.setImage(dish , holder.dishImage);
        DataBaseUtil.setScore(dish , holder.star);
        holder.dishImage.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                Intent intent = new Intent(mContext , DishActivity.class);
-               intent.putExtra("dish" ,dish);
+               intent.putExtra("dish_path" ,dish.getImagePath());
                mContext.startActivity(intent);
            }
        });

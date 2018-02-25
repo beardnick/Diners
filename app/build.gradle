@@ -32,4 +32,5 @@ dependencies {
     //3.5.5：请务必查看下面注释[1]
     compile 'cn.bmob.android:bmob-sdk:3.5.5'
     compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'devlight.io:navigationtabbar:1.2.5'
 }

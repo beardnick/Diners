@@ -15,8 +15,9 @@ public class Dish extends BmobObject{
     //性质
     private String type;
     //图片
-    private BmobFile image;
-    private Bitmap imageBitmap;
+    //不要乱改名字，这些名字是和云端的数据库绑定的
+    private BmobFile pic;
+    private String imagePath;
     //口味
     private String taste;
     //卡路里
@@ -48,22 +49,22 @@ public class Dish extends BmobObject{
         this.type = type;
     }
 
-    public BmobFile getImage() {
-        return image;
+    public BmobFile getPic() {
+        return pic;
     }
 
-    public void setImage(BmobFile image) {
-        this.image = image;
+    public void setPic(BmobFile pic) {
+        this.pic = pic;
     }
 
 
-    public Bitmap getImageBitmap() {
-        if(imageBitmap == null)return null;
-        return imageBitmap;
+    public String getImagePath() {
+        if(imagePath == null)return null;
+        return imagePath;
     }
 
-    public void setImageBitmap(Bitmap imageBitmap) {
-        this.imageBitmap = imageBitmap;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public String getTaste() {

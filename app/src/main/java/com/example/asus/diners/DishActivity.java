@@ -4,15 +4,10 @@ import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.ViewParent;
 import android.widget.ImageView;
 
 import com.example.asus.diners.Model.Dish;
 import com.example.asus.diners.Utils.DataBaseUtil;
-
-import cn.bmob.v3.Bmob;
-import cn.bmob.v3.datatype.BmobFile;
-import cn.bmob.v3.helper.BmobNative;
 
 public class DishActivity extends AppCompatActivity {
 
@@ -31,8 +26,8 @@ public class DishActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.dish_actions);
         Intent intent = getIntent();
         // TODO: 2018/2/25 解决这里可能出现的bug，强转出错 
-        Dish dish = (Dish) intent.getSerializableExtra("dish");
-        if(dish.getImageBitmap() != null)
-        dishImage.setImageBitmap(dish.getImageBitmap());
+        String path =  intent.getStringExtra("dish_path");
+        if(path != null)
+        dishImage.setImageBitmap(DataBaseUtil.setImage(path));
     }
 }
