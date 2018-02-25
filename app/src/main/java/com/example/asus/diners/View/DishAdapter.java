@@ -2,6 +2,8 @@ package com.example.asus.diners.View;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,7 +28,6 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
     
     private ArrayList<Dish> list;
     private static final String TAG = "DishAdapter";
-    private Context mContext;
 
     public DishAdapter(ArrayList<Dish> list) {
         this.list = list;
@@ -42,7 +43,6 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        mContext = parent.getContext();
         //inflate()的第一个参数是指每个item的view
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dish_view , parent , false );
         ViewHolder holder = new ViewHolder(view);
@@ -58,12 +58,20 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
        holder.dishImage.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent intent = new Intent(mContext , DishActivity.class);
+               Intent intent = new Intent(v.getContext() , DishActivity.class);
               // intent.putExtra("dish_path" ,dish.getImagePath());
-               // TODO: 2018/2/25 弄懂为啥会出现runtime exception 
-              // intent.putExtra("dish" ,dish);
+               // TODO: 2018/2/25 弄懂为啥会出现runtime exception
+               Bundle bundle = new Bundle();
+//               bundle.putSerializable("dish" , dish);
+//               bundle.putParcelable("dish" , dish);
+//               intent.putExtra("dish" , bundle);
+               intent.putExtra("dish" , (Parcelable) dish);
                intent.putExtra("dish_id" , dish.getObjectId());
-               mContext.startActivity(intent);
+               try {
+                   v.getContext().startActivity(intent);
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
            }
        });
     }

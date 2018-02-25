@@ -2,6 +2,8 @@ package com.example.asus.diners.Model;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobFile;
@@ -10,7 +12,7 @@ import cn.bmob.v3.datatype.BmobFile;
  * Created by asus on 2018/1/26.
  */
 
-public class Dish extends BmobObject{
+public class Dish extends BmobObject implements Parcelable{
     //名称
     private String name;
     //性质
@@ -34,6 +36,30 @@ public class Dish extends BmobObject{
         super();
         this.name = name;
     }
+
+    //厉害厉害，Android Studio自动实现Parcel接口
+    protected Dish(Parcel in) {
+        name = in.readString();
+        type = in.readString();
+        imagePath = in.readString();
+        imageBitmap = in.readParcelable(Bitmap.class.getClassLoader());
+        taste = in.readString();
+        calorie = in.readString();
+        material = in.readString();
+        system = in.readString();
+    }
+
+    public static final Creator<Dish> CREATOR = new Creator<Dish>() {
+        @Override
+        public Dish createFromParcel(Parcel in) {
+            return new Dish(in);
+        }
+
+        @Override
+        public Dish[] newArray(int size) {
+            return new Dish[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -107,5 +133,22 @@ public class Dish extends BmobObject{
 
     public void setSystem(String system) {
         this.system = system;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(type);
+        dest.writeString(imagePath);
+        dest.writeParcelable(imageBitmap, flags);
+        dest.writeString(taste);
+        dest.writeString(calorie);
+        dest.writeString(material);
+        dest.writeString(system);
     }
 }
