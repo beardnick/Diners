@@ -24,14 +24,14 @@ import cn.bmob.v3.listener.FindListener;
 public class DataBaseUtil{
     private static final String TAG = "DataBaseUtil";
 
-    public static  void setImage(BmobFile file , final ImageView image){
+    public static  void setImage(BmobFile file , final Dish dish){
         if(file == null)return;
         file.download(new DownloadFileListener(){
             @Override
             public void done(String s, BmobException e) {
                 if(e == null){
                     Log.v(TAG , "下载成功，保存路径：" + s);
-                    image.setImageBitmap(BitmapFactory.decodeFile(s));
+                    dish.setImageBitmap(BitmapFactory.decodeFile(s));
                 }else {
                     Log.v(TAG , "下载失败" + e.getMessage());
                 }

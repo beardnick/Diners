@@ -1,8 +1,9 @@
 package com.example.asus.diners.Model;
 
+import android.graphics.Bitmap;
+
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobFile;
-import cn.bmob.v3.datatype.BmobRelation;
 
 /**
  * Created by asus on 2018/1/26.
@@ -14,7 +15,8 @@ public class Dish extends BmobObject{
     //性质
     private String type;
     //图片
-    private BmobFile pic;
+    private BmobFile image;
+    private Bitmap imageBitmap;
     //口味
     private String taste;
     //卡路里
@@ -46,12 +48,22 @@ public class Dish extends BmobObject{
         this.type = type;
     }
 
-    public BmobFile getPic() {
-        return pic;
+    public BmobFile getImage() {
+        return image;
     }
 
-    public void setPic(BmobFile pic) {
-        this.pic = pic;
+    public void setImage(BmobFile image) {
+        this.image = image;
+    }
+
+
+    public Bitmap getImageBitmap() {
+        if(imageBitmap == null)return null;
+        return imageBitmap;
+    }
+
+    public void setImageBitmap(Bitmap imageBitmap) {
+        this.imageBitmap = imageBitmap;
     }
 
     public String getTaste() {

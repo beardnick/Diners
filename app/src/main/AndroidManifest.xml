@@ -28,6 +28,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchActivity"/>
@@ -36,15 +37,20 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>
+
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/search_config">
             </meta-data>
         </activity>
+
         <provider
-            android:authorities="com.example.dinners.provider"
-            android:name=".View.MyCustomSuggestionProvider">
+            android:name=".View.MyCustomSuggestionProvider"
+            android:authorities="com.example.dinners.provider">
         </provider>
+
+        <activity android:name=".DishActivity">
+        </activity>
     </application>
 
 </manifest>

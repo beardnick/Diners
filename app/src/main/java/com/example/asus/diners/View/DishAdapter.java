@@ -1,30 +1,22 @@
 package com.example.asus.diners.View;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.asus.diners.DishActivity;
 import com.example.asus.diners.Model.Dish;
 import com.example.asus.diners.R;
 import com.example.asus.diners.Utils.DataBaseUtil;
 
-import java.io.File;
 import java.util.ArrayList;
-
-import cn.bmob.v3.datatype.BmobFile;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.DownloadFileListener;
 
 /**
  * Created by asus on 2018/1/29.
@@ -59,10 +51,20 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-       Dish dish = list.get(position);
+       final Dish dish = list.get(position);
        holder.dishName.setText(dish.getName());
-       DataBaseUtil.setImage(dish.getPic() , holder.dishImage);
+       DataBaseUtil.setImage(dish.getImage() , dish);
+       if(dish.getImageBitmap() != null)
+       holder.dishImage.setImageBitmap(dish.getImageBitmap());
        DataBaseUtil.setScore(dish , holder.star);
+       holder.dishImage.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intent = new Intent(mContext , DishActivity.class);
+               intent.putExtra("dish" ,dish);
+               mContext.startActivity(intent);
+           }
+       });
     }
 
     @Override

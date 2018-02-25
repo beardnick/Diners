@@ -31,7 +31,6 @@ public class DishTypeAdapter extends RecyclerView.Adapter<DishTypeAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        // TODO: 2018/1/27 学习怎样从BmobFile得到图片
         list.get(position).getImage();
         holder.type.setText(list.get(position).getName());
     }
