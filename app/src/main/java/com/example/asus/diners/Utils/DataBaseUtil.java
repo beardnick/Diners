@@ -31,7 +31,6 @@ public class DataBaseUtil{
                 if(e == null){
                     Log.v(TAG , "下载成功，保存路径：" + s);
                     dish.setImagePath(s);
-                    dish.setImageBitmap(setImage(s));
                     imageView.setImageBitmap(setImage(s));
                 }else {
                     Log.v(TAG , "下载失败" + e.getMessage());

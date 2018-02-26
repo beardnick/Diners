@@ -21,7 +21,6 @@ public class Dish extends BmobObject implements Parcelable{
     //不要乱改名字，这些名字是和云端的数据库绑定的
     private BmobFile pic;
     private String imagePath;
-    private Bitmap imageBitmap;
     //口味
     private String taste;
     //卡路里
@@ -42,7 +41,6 @@ public class Dish extends BmobObject implements Parcelable{
         name = in.readString();
         type = in.readString();
         imagePath = in.readString();
-        imageBitmap = in.readParcelable(Bitmap.class.getClassLoader());
         taste = in.readString();
         calorie = in.readString();
         material = in.readString();
@@ -95,14 +93,6 @@ public class Dish extends BmobObject implements Parcelable{
         this.imagePath = imagePath;
     }
 
-    public Bitmap getImageBitmap() {
-        return imageBitmap;
-    }
-
-    public void setImageBitmap(Bitmap imageBitmap) {
-        this.imageBitmap = imageBitmap;
-    }
-
     public String getTaste() {
         return taste;
     }
@@ -145,7 +135,6 @@ public class Dish extends BmobObject implements Parcelable{
         dest.writeString(name);
         dest.writeString(type);
         dest.writeString(imagePath);
-        dest.writeParcelable(imageBitmap, flags);
         dest.writeString(taste);
         dest.writeString(calorie);
         dest.writeString(material);

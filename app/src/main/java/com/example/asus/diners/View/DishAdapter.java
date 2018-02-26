@@ -59,19 +59,10 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
            @Override
            public void onClick(View v) {
                Intent intent = new Intent(v.getContext() , DishActivity.class);
-              // intent.putExtra("dish_path" ,dish.getImagePath());
-               // TODO: 2018/2/25 弄懂为啥会出现runtime exception
-               Bundle bundle = new Bundle();
-//               bundle.putSerializable("dish" , dish);
-//               bundle.putParcelable("dish" , dish);
-//               intent.putExtra("dish" , bundle);
+//               对象中不能有Bitmap，否则会报错
                intent.putExtra("dish" , (Parcelable) dish);
-               intent.putExtra("dish_id" , dish.getObjectId());
-               try {
+//               intent.putExtra("dish_id" , dish.getObjectId());
                    v.getContext().startActivity(intent);
-               } catch (Exception e) {
-                   e.printStackTrace();
-               }
            }
        });
     }
