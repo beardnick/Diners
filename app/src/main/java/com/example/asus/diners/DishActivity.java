@@ -1,25 +1,24 @@
 package com.example.asus.diners;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.asus.diners.Model.Dish;
 import com.example.asus.diners.Utils.DataBaseUtil;
 
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.QueryListener;
+import java.util.ArrayList;
+
+import devlight.io.library.ntb.NavigationTabBar;
 
 public class DishActivity extends AppCompatActivity {
 
-    private ViewPager mViewPager;
+    private ViewPager dishActions;
     private ImageView dishImage;
+    private NavigationTabBar dishActionTab;
     private static final String TAG = "DishActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +29,8 @@ public class DishActivity extends AppCompatActivity {
 
     private void onBindView(){
         dishImage = (ImageView) findViewById(R.id.dish_big_image);
-        mViewPager = (ViewPager) findViewById(R.id.dish_actions);
+        dishActions = (ViewPager) findViewById(R.id.dish_actions);
+        dishActionTab = (NavigationTabBar) findViewById(R.id.dish_action_tab);
         Intent intent = getIntent();
         try {
             Dish dish =   intent.getParcelableExtra("dish");
@@ -59,5 +59,30 @@ public class DishActivity extends AppCompatActivity {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+        initializeDishActions();
+    }
+
+    private void initializeDishActions(){
+        final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
+        models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.drawable.ic_restaurant_menu_black_24dp) ,
+                getResources().getColor(R.color.colorAccent)
+        ).title("点菜")
+                .badgeTitle("dish")
+                .build()
+        );
+        models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.drawable.ic_description_black_24dp) ,
+                        getResources().getColor(R.color.colorAccent)
+                ).title("详情")
+                        .badgeTitle("detail")
+                        .build()
+        );
+        models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.drawable.ic_star_black_24dp) ,
+                        getResources().getColor(R.color.colorAccent)
+                ).title("评论")
+                        .badgeTitle("comment")
+                        .build()
+        );
+        dishActionTab.setModels(models);
+//        dishActionTab.setViewPager(dishActions);
     }
 }
