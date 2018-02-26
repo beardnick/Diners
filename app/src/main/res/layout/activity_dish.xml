@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.asus.diners.DishActivity">
 
     <ImageView
@@ -22,6 +23,7 @@
         <devlight.io.library.ntb.NavigationTabBar
             android:id="@+id/dish_action_tab"
             android:layout_width="match_parent"
+            app:ntb_titled="true"
             android:layout_height="0dp"
             android:layout_weight="1"
             />

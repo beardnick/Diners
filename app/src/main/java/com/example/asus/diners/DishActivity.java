@@ -7,8 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.example.asus.diners.Fragment.CommentFragment;
+import com.example.asus.diners.Fragment.DetailFragment;
+import com.example.asus.diners.Fragment.DishFragment;
 import com.example.asus.diners.Model.Dish;
 import com.example.asus.diners.Utils.DataBaseUtil;
+import com.example.asus.diners.View.ViewPagerAdapter;
 
 import java.util.ArrayList;
 
@@ -63,17 +67,23 @@ public class DishActivity extends AppCompatActivity {
     }
 
     private void initializeDishActions(){
+        ArrayList<android.support.v4.app.Fragment> list = new ArrayList<>();
+        list.add(new DetailFragment());
+        list.add(new DishFragment());
+        list.add(new CommentFragment());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager() , list);
+        dishActions.setAdapter(adapter);
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
-        models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.drawable.ic_restaurant_menu_black_24dp) ,
-                getResources().getColor(R.color.colorAccent)
-        ).title("点菜")
-                .badgeTitle("dish")
-                .build()
-        );
         models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.drawable.ic_description_black_24dp) ,
                         getResources().getColor(R.color.colorAccent)
                 ).title("详情")
                         .badgeTitle("detail")
+                        .build()
+        );
+        models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.drawable.ic_restaurant_menu_black_24dp) ,
+                        getResources().getColor(R.color.colorAccent)
+                ).title("点菜")
+                        .badgeTitle("dish")
                         .build()
         );
         models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.drawable.ic_star_black_24dp) ,
@@ -83,6 +93,6 @@ public class DishActivity extends AppCompatActivity {
                         .build()
         );
         dishActionTab.setModels(models);
-//        dishActionTab.setViewPager(dishActions);
+        dishActionTab.setViewPager(dishActions);
     }
 }
