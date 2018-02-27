@@ -1,6 +1,24 @@
 <resources>
     <string name="app_name">Diners</string>
     <string name="search_hint">搜索</string>
+    <string name="hello">你好</string>
+    <string name="material">原料</string>
+    <string name="calorie">卡路里</string>
+    <string name="system">菜系</string>
+    <string name="taste">口味</string>
+    <string name="unknown">未知</string>
+
+    <!--private String type;-->
+    <!--//口味-->
+    <!--private String taste;-->
+    <!--//卡路里-->
+    <!--private String calorie;-->
+    <!--//原料-->
+    <!--private String material;-->
+    <!--//菜系-->
+    <!--private String system;-->
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
