@@ -10,6 +10,8 @@ public class Place extends BmobObject {
 
     private String name;
 
+    private String cost;
+
     public Place(String name) {
         super();
         this.name = name;
@@ -21,5 +23,13 @@ public class Place extends BmobObject {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCost() {
+        return cost;
+    }
+
+    public void setCost(String cost) {
+        this.cost = cost;
     }
 }

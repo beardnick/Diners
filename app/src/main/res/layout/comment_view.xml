@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/edge_margin"
+    android:layout_marginEnd="@dimen/edge_margin">
 
     <TextView
         android:id="@+id/time"
@@ -10,9 +12,19 @@
         android:gravity="center_vertical"
         android:text="yyyy:MM:dd"/>
 
+    <RatingBar
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/text_height"
+        android:layout_below="@id/time"
+        android:isIndicator="true"
+        android:max="5"
+        android:numStars="5"
+        />
+
     <TextView
         android:id="@+id/content"
-        android:layout_below="@id/time"
+        android:layout_below="@id/score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="test"/>

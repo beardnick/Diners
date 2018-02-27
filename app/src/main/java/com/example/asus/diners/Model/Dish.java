@@ -38,6 +38,7 @@ public class Dish extends BmobObject implements Parcelable{
 
     //厉害厉害，Android Studio自动实现Parcel接口
     protected Dish(Parcel in) {
+        //读取的变量和对应的变量绑定时是通过赋值的顺序来确定的
         name = in.readString();
         type = in.readString();
         imagePath = in.readString();
@@ -45,6 +46,7 @@ public class Dish extends BmobObject implements Parcelable{
         calorie = in.readString();
         material = in.readString();
         system = in.readString();
+        setObjectId(in.readString());
     }
 
     public static final Creator<Dish> CREATOR = new Creator<Dish>() {
@@ -139,5 +141,6 @@ public class Dish extends BmobObject implements Parcelable{
         dest.writeString(calorie);
         dest.writeString(material);
         dest.writeString(system);
+        dest.writeString(getObjectId());
     }
 }

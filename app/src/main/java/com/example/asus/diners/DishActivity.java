@@ -1,7 +1,6 @@
 package com.example.asus.diners;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +8,7 @@ import android.widget.ImageView;
 
 import com.example.asus.diners.Fragment.CommentFragment;
 import com.example.asus.diners.Fragment.DetailFragment;
-import com.example.asus.diners.Fragment.DishFragment;
+import com.example.asus.diners.Fragment.PlaceFragment;
 import com.example.asus.diners.Model.Dish;
 import com.example.asus.diners.Utils.DataBaseUtil;
 import com.example.asus.diners.View.ViewPagerAdapter;
@@ -22,8 +21,12 @@ public class DishActivity extends AppCompatActivity {
 
     private ViewPager dishActions;
     private ImageView dishImage;
+    private Dish dish;
     private NavigationTabBar dishActionTab;
     private static final String TAG = "DishActivity";
+    private final DetailFragment detailFragment = new DetailFragment();
+    private final CommentFragment commentFragment = new CommentFragment();
+    private final PlaceFragment mPlaceFragment = new PlaceFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +40,8 @@ public class DishActivity extends AppCompatActivity {
         dishActionTab = (NavigationTabBar) findViewById(R.id.dish_action_tab);
         Intent intent = getIntent();
         try {
-            Dish dish =   intent.getParcelableExtra("dish");
+//            dish =   (Dish) intent.getSerializableExtra("dish");
+            dish = intent.getParcelableExtra("dish");
             if(DataBaseUtil.setImage(dish.getImagePath()) != null)
             dishImage.setImageBitmap(DataBaseUtil.setImage(dish.getImagePath()));
         } catch (Exception e) {
@@ -68,9 +72,12 @@ public class DishActivity extends AppCompatActivity {
 
     private void initializeDishActions(){
         ArrayList<android.support.v4.app.Fragment> list = new ArrayList<>();
-        list.add(new DetailFragment());
-        list.add(new DishFragment());
-        list.add(new CommentFragment());
+        detailFragment.setDish(dish);
+        commentFragment.setDish(dish);
+        mPlaceFragment.setDish(dish);
+       list.add(detailFragment);
+       list.add(mPlaceFragment);
+       list.add(commentFragment);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager() , list);
         dishActions.setAdapter(adapter);
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();

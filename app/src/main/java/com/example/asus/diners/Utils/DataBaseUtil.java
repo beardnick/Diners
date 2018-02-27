@@ -3,12 +3,16 @@ package com.example.asus.diners.Utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
 import com.example.asus.diners.Model.Comment;
 import com.example.asus.diners.Model.Dish;
+import com.example.asus.diners.View.CommentAdapter;
 import com.example.asus.diners.View.DishAdapter;
+import com.example.asus.diners.View.PlaceAdapter;
+
 import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobPointer;
@@ -54,7 +58,7 @@ public class DataBaseUtil{
     //因为查询是在子线程中执行的，还没得到list就已经返回了
     public static void searchDish(String queryString , final DishAdapter adapter){
         final BmobQuery<Dish> query = new BmobQuery<>();
-        query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
+        query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ONLY);
         final char[] queryChars = queryString.toCharArray();
         for(char x : queryChars)Log.v( TAG , String.valueOf(x));
             query.findObjects(new FindListener<Dish>() {
@@ -85,13 +89,37 @@ public class DataBaseUtil{
             });
     }
 
-    public static void setScore(Dish dish , final RatingBar score){
+    public static void searchPlace(String dishName  , PlaceAdapter adapter){
+
+    }
+
+    public static void searchComment(final Dish dish, final CommentAdapter adapter){
+        BmobQuery<Comment> query = new BmobQuery<>();
+        query.addWhereEqualTo("dish" , new BmobPointer(dish));
+        query.findObjects(new FindListener<Comment>() {
+            @Override
+            public void done(List<Comment> list, BmobException e) {
+                adapter.getList().clear();
+                Log.d(TAG, "searchComment: objectId: " + dish.getObjectId());
+                if(e == null){
+                    adapter.getList().addAll(list);
+                    Log.d(TAG, "searchComment: 查询成功" +list.size() );
+                }else {
+                    Log.d(TAG, "searchComment: 查询失败" + e.getMessage());
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    public static void setScore(final Dish dish , final RatingBar score){
         BmobQuery<Comment> query = new BmobQuery<>();
         query.addQueryKeys("score");
         query.addWhereEqualTo("dish" , new BmobPointer(dish));
         query.findObjects(new FindListener<Comment>() {
             @Override
             public void done(List<Comment> list, BmobException e) {
+                Log.d(TAG, "setScore: objectId: " + dish.getObjectId());
                 if(e == null){
                     if(list.size() == 0){
                         score.setRating(0);
