@@ -1,7 +1,5 @@
 package com.example.asus.diners.Model;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -16,7 +14,7 @@ public class Dish extends BmobObject implements Parcelable{
     //名称
     private String name;
     //性质
-    private String type;
+    private String attribute;
     //图片
     //不要乱改名字，这些名字是和云端的数据库绑定的
     private BmobFile pic;
@@ -40,7 +38,7 @@ public class Dish extends BmobObject implements Parcelable{
     protected Dish(Parcel in) {
         //读取的变量和对应的变量绑定时是通过赋值的顺序来确定的
         name = in.readString();
-        type = in.readString();
+        attribute = in.readString();
         imagePath = in.readString();
         taste = in.readString();
         calorie = in.readString();
@@ -69,12 +67,12 @@ public class Dish extends BmobObject implements Parcelable{
         this.name = name;
     }
 
-    public String getType() {
-        return type;
+    public String getAttribute() {
+        return attribute;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setAttribute(String attribute) {
+        this.attribute = attribute;
     }
 
     public BmobFile getPic() {
@@ -135,7 +133,7 @@ public class Dish extends BmobObject implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
-        dest.writeString(type);
+        dest.writeString(attribute);
         dest.writeString(imagePath);
         dest.writeString(taste);
         dest.writeString(calorie);

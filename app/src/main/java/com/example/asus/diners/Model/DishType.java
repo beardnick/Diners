@@ -10,40 +10,32 @@ import cn.bmob.v3.datatype.BmobRelation;
 
 public class DishType extends BmobObject {
 
+    //类型指代近期新品，健身轻餐等
 
-    private String name;
 
-    private BmobRelation belong;
+    private Dish dish;
 
-    private BmobFile image;
+    private Type type;
 
-    public BmobFile getImage() {
-        return image;
+    public DishType(String tableName, Dish dish, Type type) {
+        super(tableName);
+        this.dish = dish;
+        this.type = type;
     }
 
-    public void setImage(BmobFile image) {
-        this.image = image;
+    public Type getType() {
+        return type;
     }
 
-    public DishType(String name) {
-        super();
-        this.name = name;
+    public void setType(Type type) {
+        this.type = type;
     }
 
-    public String getName() {
-
-        return name;
+    public Dish getDish() {
+        return dish;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public BmobRelation getBelong() {
-        return belong;
-    }
-
-    public void setBelong(BmobRelation belong) {
-        this.belong = belong;
+    public void setDish(Dish dish) {
+        this.dish = dish;
     }
 }

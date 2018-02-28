@@ -26,7 +26,6 @@
         android:id="@+id/content"
         android:layout_below="@id/score"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="test"/>
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

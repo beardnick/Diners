@@ -16,21 +16,12 @@ public class DishPlace extends BmobObject {
     //该菜品在这个店子中的价格
     private Float cost;
 
-    private BmobFile image;
 
     public DishPlace(Dish dish, Place place, Float cost) {
         super();
         this.dish = dish;
         this.place = place;
         this.cost = cost;
-    }
-
-    public BmobFile getImage() {
-        return image;
-    }
-
-    public void setImage(BmobFile image) {
-        this.image = image;
     }
 
     public Dish getDish() {

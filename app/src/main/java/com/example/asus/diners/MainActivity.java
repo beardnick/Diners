@@ -29,20 +29,12 @@ import cn.bmob.v3.listener.UpdateListener;
 public class MainActivity extends AppCompatActivity {
 
     private final static String TAG = "MainActivity";
-    private List<DishType>dishTypeList=new ArrayList<>();
     private SearchView mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
-//        initDishType();
-//        RecyclerView recyclerView =(RecyclerView)findViewById(R.id.dish_type);
-//        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(layoutManager);
-//        DishTypeAdapter adapter = new DishTypeAdapter(dishTypeList);
-//        recyclerView.setAdapter(adapter);
-
         //第二：自v3.4.7版本开始,设置BmobConfig,允许设置请求超时时间、文件分片上传时每片的大小、文件的过期时间(单位为秒)，
         BmobConfig config =new BmobConfig.Builder(this)
         //设置appkey
