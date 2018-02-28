@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/place_name"
@@ -14,25 +14,28 @@
         android:id="@+id/cost"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/text_height"
-        android:layout_marginStart="80dp"
-        android:layout_toEndOf="@id/place_name"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="126dp"
+        android:layout_toEndOf="@+id/place_name"
         android:gravity="center_vertical"
-        android:text="2.50"/>
+        android:text="3.50"/>
 
     <ImageView
         android:id="@+id/cny"
-        android:layout_toEndOf="@id/cost"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/text_height"
-        android:layout_marginStart="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_toEndOf="@+id/cost"
         android:src="@drawable/cny"/>
 
     <CheckBox
         android:id="@+id/buy"
-        android:gravity="center_vertical"
-        android:layout_toEndOf="@id/cny"
-        android:layout_marginStart="50dp"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/text_height"/>
+        android:layout_height="@dimen/text_height"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="37dp"
+        android:gravity="center_vertical"/>
 
 </RelativeLayout>

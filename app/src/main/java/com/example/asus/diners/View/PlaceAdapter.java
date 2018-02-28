@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.example.asus.diners.Model.Place;
+import com.example.asus.diners.Model.DishPlace;
 import com.example.asus.diners.R;
 
 import java.util.ArrayList;
@@ -19,15 +19,15 @@ import java.util.ArrayList;
 public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder>{
 
 
-    public PlaceAdapter(ArrayList<Place> list) {
+    public PlaceAdapter(ArrayList<DishPlace> list) {
         this.list = list;
     }
 
-    public ArrayList<Place> getList() {
+    public ArrayList<DishPlace> getList() {
         return list;
     }
 
-    public void setList(ArrayList<Place> list) {
+    public void setList(ArrayList<DishPlace> list) {
         this.list = list;
     }
 
@@ -38,18 +38,25 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Place place = list.get(position);
-        holder.placeName.setText(place.getName());
-        holder.cost.setText(place.getCost());
+    public void onBindViewHolder(PlaceAdapter.ViewHolder holder, int position) {
+        DishPlace dishPlace = list.get(position);
+        holder.cost.setText(String.valueOf(dishPlace.getCost()));
+        holder.placeName.setText(dishPlace.getPlace().getName());
     }
+
+//    @Override
+//    public void onBindViewHolder(ViewHolder holder, int position) {
+//        DishPlace place = list.get(position);
+//        holder.placeName.setText(place.getName());
+//        holder.cost.setText(place.getCost());
+//    }
 
     @Override
     public int getItemCount() {
         return list.size();
     }
 
-    private ArrayList<Place> list;
+    private ArrayList<DishPlace> list;
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView cost;
         public TextView placeName;

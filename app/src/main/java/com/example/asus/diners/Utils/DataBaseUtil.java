@@ -9,6 +9,7 @@ import android.widget.RatingBar;
 
 import com.example.asus.diners.Model.Comment;
 import com.example.asus.diners.Model.Dish;
+import com.example.asus.diners.Model.DishPlace;
 import com.example.asus.diners.View.CommentAdapter;
 import com.example.asus.diners.View.DishAdapter;
 import com.example.asus.diners.View.PlaceAdapter;
@@ -89,8 +90,24 @@ public class DataBaseUtil{
             });
     }
 
-    public static void searchPlace(String dishName  , PlaceAdapter adapter){
-
+    public static void searchDishPlace(final Dish dish , final PlaceAdapter adapter){
+        BmobQuery<DishPlace> query = new BmobQuery<>();
+        query.addWhereEqualTo("dish" , new BmobPointer(dish));
+        query.findObjects(new FindListener<DishPlace>() {
+            @Override
+            public void done(List<DishPlace> list, BmobException e) {
+                adapter.getList().clear();
+                 if(e == null){
+                     adapter.getList().addAll(list);
+                     Log.d(TAG, "searchDishPlace :查询成功" + list.size());
+                     Log.d(TAG, "searchDishPlace :查询成功" +
+                             list.get(0).getPlace().getName() + list.get(0).getDish().getName());
+                 }else {
+                     Log.d(TAG, "searchDishPlace :查询失败" + e.getMessage());
+                 }
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     public static void searchComment(final Dish dish, final CommentAdapter adapter){
@@ -101,6 +118,8 @@ public class DataBaseUtil{
             public void done(List<Comment> list, BmobException e) {
                 adapter.getList().clear();
                 Log.d(TAG, "searchComment: objectId: " + dish.getObjectId());
+                Log.d(TAG, "searchComment: objectId: " +
+                list.get(0).getContent() + list.get(0).getScore());
                 if(e == null){
                     adapter.getList().addAll(list);
                     Log.d(TAG, "searchComment: 查询成功" +list.size() );
