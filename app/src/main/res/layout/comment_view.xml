@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--height 如果不是match_parent content 就显示不出来-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/edge_margin"
-    android:layout_marginEnd="@dimen/edge_margin">
+    android:layout_marginEnd="@dimen/edge_margin"
+    android:layout_marginBottom="@dimen/item_margin"
+    android:layout_marginTop="@dimen/item_margin"
+    style="@style/cardStyle">
 
     <TextView
         android:id="@+id/time"
@@ -21,7 +25,7 @@
         android:isIndicator="true"
         android:max="5"
         android:numStars="5"
-        android:rating="3"/>
+        android:rating="0"/>
 
     <TextView
         android:id="@+id/content"

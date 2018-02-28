@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/edge_margin"
+    android:layout_marginEnd="@dimen/edge_margin"
+    android:layout_marginTop="@dimen/item_margin"
+    android:layout_marginBottom="@dimen/item_margin"
+    style="@style/cardStyle">
     <!--如果是height是match_parent的话，view将会充满整个RecyclerView ， 会很难看-->
 
     <ImageView
@@ -12,13 +17,15 @@
 
     <TextView
         android:id="@+id/name"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
         android:layout_toEndOf="@id/dish_image"
         android:gravity="center"
         android:text="test"
-        android:layout_marginLeft="30dp"/>
+        android:textColor="#ffffff"
+        android:background="@drawable/text_bg"
+        android:layout_marginStart="30dp"/>
 
     <RatingBar
         android:id="@+id/star"
@@ -32,7 +39,7 @@
         android:isIndicator="true"
         android:max="50"
         android:numStars="5"
-        android:rating="3.5"
+        android:rating="0"
         android:stepSize="0.1">
     </RatingBar>
 
