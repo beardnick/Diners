@@ -44,8 +44,8 @@ public class PlaceFragment extends Fragment {
         places = (RecyclerView) view.findViewById(R.id.places);
         places.setLayoutManager(new LinearLayoutManager(view.getContext()));
         PlaceAdapter adapter = new PlaceAdapter(new ArrayList<DishPlace>());
-        DataBaseUtil.searchDishPlace(dish , adapter);
         places.setAdapter(adapter);
+        DataBaseUtil.searchDishPlace(dish , adapter);
         return view;
     }
 

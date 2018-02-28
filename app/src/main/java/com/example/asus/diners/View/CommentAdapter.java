@@ -1,6 +1,7 @@
 package com.example.asus.diners.View;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder>{
 
     ArrayList<Comment> list;
+
+    private static final String TAG = "CommentAdapter";
 
     public ArrayList<Comment> getList() {
         return list;
@@ -42,6 +45,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Comment comment = list.get(position);
+        Log.d(TAG, "onBindViewHolder: 星级" +comment.getScore() );
         holder.score.setRating(comment.getScore());
         holder.content.setText(comment.getContent());
         holder.time.setText(comment.getCreatedAt());

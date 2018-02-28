@@ -14,13 +14,14 @@
 
     <RatingBar
         android:id="@+id/score"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/text_height"
         android:layout_below="@id/time"
         android:isIndicator="true"
         android:max="5"
         android:numStars="5"
-        />
+        android:rating="3"/>
 
     <TextView
         android:id="@+id/content"
