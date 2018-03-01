@@ -4,7 +4,13 @@ import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.asus.diners.Fragment.CommentFragment;
 import com.example.asus.diners.Fragment.DetailFragment;
@@ -23,6 +29,7 @@ public class DishActivity extends AppCompatActivity {
     private ImageView dishImage;
     private Dish dish;
     private NavigationTabBar dishActionTab;
+    private Toolbar toolbar;
     private static final String TAG = "DishActivity";
     private final DetailFragment detailFragment = new DetailFragment();
     private final CommentFragment commentFragment = new CommentFragment();
@@ -31,7 +38,10 @@ public class DishActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dish);
+        toolbar = (Toolbar) findViewById(R.id.dish_title_bar);
+        setSupportActionBar(toolbar);
         onBindView();
+        onInitEvent();
     }
 
     private void onBindView(){
@@ -102,5 +112,33 @@ public class DishActivity extends AppCompatActivity {
         );
         dishActionTab.setModels(models);
         dishActionTab.setViewPager(dishActions);
+    }
+
+    private void onInitEvent(){
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: you have click on the come back button");
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.dish_menu , menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.add_comment:
+                Toast.makeText(this, "添加评论", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }

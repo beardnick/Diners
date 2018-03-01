@@ -7,12 +7,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.asus.diners.DishActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/dish_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+        />
+
     <ImageView
         android:id="@+id/dish_big_image"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="fitXY"
-        android:background="@mipmap/dish"/>
+        android:background="@mipmap/dish"
+        android:layout_below="@id/dish_title_bar"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
