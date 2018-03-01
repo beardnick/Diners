@@ -3,7 +3,6 @@ package com.example.asus.diners.Utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
-import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
@@ -28,15 +27,23 @@ import cn.bmob.v3.listener.FindListener;
 public class DataBaseUtil{
     private static final String TAG = "DataBaseUtil";
 
-    public static void setImage(final Dish dish , final ImageView imageView){
+    public static void getImage(final Dish dish , final ImageView imageView){
         if(dish.getPic() == null)return;
+        String path = imageView.getContext().getApplicationContext()
+                .getCacheDir()+"/bmob/" + dish.getPic().getFilename();
+        Log.d(TAG, "getImage: 路径 = " + path);
+        if(getImage(path) != null){
+            imageView.setImageBitmap(getImage(path));
+            dish.setImagePath(path);
+            return;
+        }
         dish.getPic().download(new DownloadFileListener(){
             @Override
             public void done(String s, BmobException e) {
                 if(e == null){
                     Log.v(TAG , "下载成功，保存路径：" + s);
                     dish.setImagePath(s);
-                    imageView.setImageBitmap(setImage(s));
+                    imageView.setImageBitmap(getImage(s));
                 }else {
                     Log.v(TAG , "下载失败" + e.getMessage());
                 }
@@ -47,10 +54,29 @@ public class DataBaseUtil{
         });
     }
 
-    public static Bitmap setImage(String path){
+    public static void downloadImage(final Dish dish){
+        if(dish.getPic() == null)return;
+        dish.getPic().download(new DownloadFileListener(){
+            @Override
+            public void done(String s, BmobException e) {
+                if(e == null){
+                    Log.v(TAG , "下载成功，保存路径：" + s);
+                    dish.setImagePath(s);
+                }else {
+                    Log.v(TAG , "下载失败" + e.getMessage());
+                }
+            }
+            @Override
+            public void onProgress(Integer integer, long l) {
+            }
+        });
+    }
+
+    public static Bitmap getImage(String path){
         Bitmap image = BitmapFactory.decodeFile(path);
         if(image == null){
             Log.v(TAG , "路径无效");
+            return null;
         }
         return image;
     }
@@ -79,6 +105,7 @@ public class DataBaseUtil{
                                 //直接使用list会产生Java ConcurrentModificationException
                                 //这个异常发生在迭代容器同时修改容器时
                                 adapter.getList().add(x);
+//                                downloadImage(x);
                             }
                         }
                         Log.v(TAG , "查询成功，共：" + list.size() + "条数据");

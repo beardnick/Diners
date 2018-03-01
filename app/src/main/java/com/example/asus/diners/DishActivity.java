@@ -42,8 +42,8 @@ public class DishActivity extends AppCompatActivity {
         try {
 //            dish =   (Dish) intent.getSerializableExtra("dish");
             dish = intent.getParcelableExtra("dish");
-            if(DataBaseUtil.setImage(dish.getImagePath()) != null)
-            dishImage.setImageBitmap(DataBaseUtil.setImage(dish.getImagePath()));
+            if(DataBaseUtil.getImage(dish.getImagePath()) != null)
+            dishImage.setImageBitmap(DataBaseUtil.getImage(dish.getImagePath()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,7 +57,7 @@ public class DishActivity extends AppCompatActivity {
 //                public void done(Dish dish, BmobException e) {
 //                    if(e == null){
 //                        dishes[0] = dish;
-//                        DataBaseUtil.setImage(dishes[0] , dishImage);
+//                        DataBaseUtil.getImage(dishes[0] , dishImage);
 //                        Log.v(TAG , "查询成功" + dish.getName());
 //                    }else {
 //                        Log.v(TAG , "查询失败" + e.getMessage());

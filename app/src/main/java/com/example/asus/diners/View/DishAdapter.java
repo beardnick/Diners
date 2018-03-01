@@ -1,8 +1,6 @@
 package com.example.asus.diners.View;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,7 +16,6 @@ import com.example.asus.diners.Model.Dish;
 import com.example.asus.diners.R;
 import com.example.asus.diners.Utils.DataBaseUtil;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -54,7 +51,8 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
     public void onBindViewHolder(final ViewHolder holder, int position) {
        final Dish dish = list.get(position);
        holder.dishName.setText(dish.getName());
-       DataBaseUtil.setImage(dish , holder.dishImage);
+       DataBaseUtil.getImage(dish , holder.dishImage);
+//       holder.dishImage.setImageBitmap(DataBaseUtil.getImage(dish.getImagePath()));
        DataBaseUtil.setScore(dish , holder.star);
        holder.dishImage.setOnClickListener(new View.OnClickListener() {
            @Override
