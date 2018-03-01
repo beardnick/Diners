@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.asus.diners.R;
 
@@ -40,8 +41,14 @@ public class DishAttributeAdapter extends RecyclerView.Adapter<DishAttributeAdap
 
 
     @Override
-    public void onBindViewHolder(DishAttributeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(DishAttributeAdapter.ViewHolder holder, final int position) {
         holder.attribute.setText(list[position]);
+        holder.attribute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "你点击了" + list[position], Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 

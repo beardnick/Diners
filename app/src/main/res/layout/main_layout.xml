@@ -11,109 +11,139 @@
         android:layout_height="wrap_content"
         />
 
-<GridLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/dish_attribute_button"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_below="@id/search">
-
-        <Button
-            android:id="@+id/littleeat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="小吃" />
-
-        <Button
-            android:id="@+id/ricedish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="米饭套餐" />
-
-        <Button
-            android:id="@+id/noodles"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="面食" />
-
-        <Button
-            android:id="@+id/porridge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="粥汤" />
-
-        <Button
-            android:id="@+id/hotpot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="火锅" />
-
-    </android.support.v7.widget.RecyclerView>
-</GridLayout>
-
-    <RelativeLayout
-        android:id="@+id/dish_type_button"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:rowCount="6"
-        android:columnCount="4"
-        android:orientation="horizontal"
+        android:layout_below="@id/search"/>
+
+<!--<GridLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content">-->
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/dish_attribute_button"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_below="@id/search">-->
+
+        <!--<Button-->
+            <!--android:id="@+id/littleeat"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="小吃" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/ricedish"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="米饭套餐" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/noodles"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="面食" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/porridge"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="粥汤" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/hotpot"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="火锅" />-->
+
+    <!--</android.support.v7.widget.RecyclerView>-->
+<!--</GridLayout>-->
+
+    <GridLayout
+        android:id="@+id/dish_type_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:rowCount="2"
+        android:columnCount="3"
+        android:layout_marginTop="@dimen/edge_margin"
+        android:layout_below="@id/dish_attribute_button"
+        android:layout_centerHorizontal="true"
+        style="@style/cardStyle"
         >
 
         <Button
             android:id="@+id/breakfast"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="营养早餐"
-            android:drawableTop="@drawable/littlebreakfast1"/>
+            android:drawableTop="@drawable/littlebreakfast1"
+            android:layout_columnWeight="1"
+            android:layout_row="0"
+            android:layout_column="0"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            />
 
         <Button
             android:id="@+id/lunch"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:text="丰盛午餐"
-            android:drawableTop="@drawable/littlelunch1"/>
+            android:drawableTop="@drawable/littlelunch1"
+            android:layout_columnWeight="1"
+            android:layout_row="0"
+            android:layout_column="1"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            />
 
         <Button
             android:id="@+id/supper"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
             android:text="温馨晚餐"
-            android:drawableTop="@drawable/littlesupper1"/>
+            android:drawableTop="@drawable/littlesupper1"
+            android:layout_columnWeight="1"
+            android:layout_row="0"
+            android:layout_column="2"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            />
 
         <Button
             android:id="@+id/lighteat"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below ="@+id/breakfast"
             android:text="健身轻餐"
-            android:drawableTop="@drawable/lighteat"/>
+            android:drawableTop="@drawable/lighteat"
+            android:layout_columnWeight="1"
+            android:layout_row="1"
+            android:layout_column="0"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            />
 
         <Button
             android:id="@+id/newproducts"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/lunch"
-            android:layout_toRightOf="@+id/lighteat"
-            android:layout_centerInParent="true"
             android:text="近期新品"
-            android:drawableTop="@drawable/newproducts"/>
+            android:drawableTop="@drawable/newproducts"
+            android:layout_columnWeight="1"
+            android:layout_row="1"
+            android:layout_column="1"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            />
 
         <Button
             android:id="@+id/support"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/supper"
-            android:layout_toRightOf="@id/newproducts"
             android:text="推荐"
-            android:drawableTop="@drawable/support"/>
-    </RelativeLayout>
+            android:drawableTop="@drawable/support"
+            android:layout_columnWeight="1"
+            android:layout_row="1"
+            android:layout_column="2"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            />
+    </GridLayout>
 
 
 </RelativeLayout>

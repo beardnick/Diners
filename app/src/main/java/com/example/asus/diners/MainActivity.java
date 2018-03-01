@@ -34,17 +34,18 @@ public class MainActivity extends AppCompatActivity {
 
     private final static String TAG = "MainActivity";
     private SearchView mSearchView;
+    private String[] dishAttributes = {"小吃" , "米饭套餐"  , "面食" , "粥汤" , "火锅"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
-        initDishattribute();
+//        initDishattribute();
         RecyclerView recyclerView=(RecyclerView)findViewById(R.id.dish_attribute_button);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        DishAttributeAdapter dishAttributeAdapter = new DishAttributeAdapter(String [5]);
-        recyclerView.setDishAttributeAdapter(dishAttributeAdapter);
+        DishAttributeAdapter dishAttributeAdapter = new DishAttributeAdapter(dishAttributes);
+        recyclerView.setAdapter(dishAttributeAdapter);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         //第二：自v3.4.7版本开始,设置BmobConfig,允许设置请求超时时间、文件分片上传时每片的大小、文件的过期时间(单位为秒)，
         BmobConfig config =new BmobConfig.Builder(this)
@@ -72,10 +73,10 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
-    private void initDishattribute(){
-        for(int i=0;i<5;i++)
-
-    }
+//    private void initDishattribute(){
+//        for(int i=0;i<5;i++)
+//
+//    }
 
     private void onBindView(){
         mSearchView = (SearchView) findViewById(R.id.search);
