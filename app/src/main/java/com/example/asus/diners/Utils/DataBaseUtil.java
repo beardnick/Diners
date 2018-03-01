@@ -9,6 +9,8 @@ import android.widget.RatingBar;
 import com.example.asus.diners.Model.Comment;
 import com.example.asus.diners.Model.Dish;
 import com.example.asus.diners.Model.DishPlace;
+import com.example.asus.diners.Model.DishType;
+import com.example.asus.diners.Model.Type;
 import com.example.asus.diners.View.CommentAdapter;
 import com.example.asus.diners.View.DishAdapter;
 import com.example.asus.diners.View.PlaceAdapter;
@@ -44,24 +46,6 @@ public class DataBaseUtil{
                     Log.v(TAG , "下载成功，保存路径：" + s);
                     dish.setImagePath(s);
                     imageView.setImageBitmap(getImage(s));
-                }else {
-                    Log.v(TAG , "下载失败" + e.getMessage());
-                }
-            }
-            @Override
-            public void onProgress(Integer integer, long l) {
-            }
-        });
-    }
-
-    public static void downloadImage(final Dish dish){
-        if(dish.getPic() == null)return;
-        dish.getPic().download(new DownloadFileListener(){
-            @Override
-            public void done(String s, BmobException e) {
-                if(e == null){
-                    Log.v(TAG , "下载成功，保存路径：" + s);
-                    dish.setImagePath(s);
                 }else {
                     Log.v(TAG , "下载失败" + e.getMessage());
                 }
@@ -115,6 +99,62 @@ public class DataBaseUtil{
                         adapter.notifyDataSetChanged();
                 }
             });
+    }
+
+    public static void searchDishByType(String type , final DishAdapter adapter){
+        BmobQuery<Type> typeQuery = new BmobQuery<>();
+        final BmobQuery<DishType> dishTypeQuery = new BmobQuery<>();
+        typeQuery.addWhereEqualTo("name" , type);
+        typeQuery.findObjects(new FindListener<Type>() {
+            @Override
+            public void done(List<Type> list, BmobException e) {
+                if(e == null){
+                    if(list.size() > 0){
+                            dishTypeQuery.addWhereEqualTo("type" , new BmobPointer(list.get(0)));
+                            dishTypeQuery.include("dish");
+                            dishTypeQuery.findObjects(new FindListener<DishType>() {
+                                @Override
+                                public void done(List<DishType> list, BmobException e) {
+                                    adapter.getList().clear();
+                                    if (e != null) {
+                                        for (DishType x: list
+                                             ) {
+                                            adapter.getList().add(x.getDish());
+                                        }
+                                        Log.d(TAG, "searchDishByType :查询成功 dish" +adapter.getList().size() );
+                                    }else {
+                                        Log.d(TAG, "searchDishByType :查询失败" + e.getMessage());
+                                    }
+                                    adapter.notifyDataSetChanged();
+                                }
+                            });
+                    }
+                    Log.d(TAG, "searchDishByType :查询成功 type" + list.size());
+                }else {
+
+                }
+            }
+        });
+
+
+    }
+
+    public static void searchDishByAttribute(String attribute , final DishAdapter adapter){
+        BmobQuery<Dish> query = new BmobQuery<>();
+        query.addWhereEqualTo("attribute" , attribute);
+        query.findObjects(new FindListener<Dish>() {
+            @Override
+            public void done(List<Dish> list, BmobException e) {
+                adapter.getList().clear();
+                if(e == null){
+                    adapter.getList().addAll(list);
+                    Log.d(TAG, "searchDishByAttribute :查询成功" + list.size());
+                }else {
+                    Log.d(TAG, "searchDishByAttribute :查询失败" + e.getMessage());
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     public static void searchDishPlace(final Dish dish , final PlaceAdapter adapter){
