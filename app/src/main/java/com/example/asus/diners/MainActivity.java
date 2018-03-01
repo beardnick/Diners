@@ -4,14 +4,18 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.widget.LinearLayout;
 
 import com.example.asus.diners.Model.Comment;
 import com.example.asus.diners.Model.Dish;
 import com.example.asus.diners.Model.DishPlace;
 import com.example.asus.diners.Model.DishType;
 import com.example.asus.diners.Model.Place;
+import com.example.asus.diners.View.DishAttributeAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
+        initDishattribute();
+        RecyclerView recyclerView=(RecyclerView)findViewById(R.id.dish_attribute_button);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        DishAttributeAdapter dishAttributeAdapter = new DishAttributeAdapter(String [5]);
+        recyclerView.setDishAttributeAdapter(dishAttributeAdapter);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         //第二：自v3.4.7版本开始,设置BmobConfig,允许设置请求超时时间、文件分片上传时每片的大小、文件的过期时间(单位为秒)，
         BmobConfig config =new BmobConfig.Builder(this)
         //设置appkey
@@ -60,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
 //            dishTypeList.add(warm_dinner);
 //        }
 //    }
+
+    private void initDishattribute(){
+        for(int i=0;i<5;i++)
+
+    }
 
     private void onBindView(){
         mSearchView = (SearchView) findViewById(R.id.search);
