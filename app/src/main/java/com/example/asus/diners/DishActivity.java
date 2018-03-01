@@ -80,6 +80,7 @@ public class DishActivity extends AppCompatActivity {
        list.add(commentFragment);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager() , list);
         dishActions.setAdapter(adapter);
+        dishActions.setOffscreenPageLimit(2);
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
         models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.drawable.ic_description_black_24dp) ,
                         getResources().getColor(R.color.colorAccent)
