@@ -38,6 +38,7 @@ public class DishAttributeAdapter extends RecyclerView.Adapter<DishAttributeAdap
         return viewHolder;
     }
 
+
     @Override
     public void onBindViewHolder(DishAttributeAdapter.ViewHolder holder, int position) {
         holder.attribute.setText(list[position]);
