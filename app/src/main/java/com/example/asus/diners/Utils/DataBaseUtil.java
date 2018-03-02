@@ -1,5 +1,6 @@
 package com.example.asus.diners.Utils;
 
+import android.content.BroadcastReceiver;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;

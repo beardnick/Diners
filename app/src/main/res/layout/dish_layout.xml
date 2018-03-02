@@ -14,11 +14,31 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/dish"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true">
 
         <!--<android.support.v4.widget.SwipeRefreshLayout-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"/>-->
     </android.support.v7.widget.RecyclerView>
+
+    <ImageView
+        android:id="@+id/not_found_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/nothing"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/not_found_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/not_found_image"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size"
+        android:text="没找到哟 , 换个关键词再试试吧"
+        android:textColor="#cdcdcd"
+        android:visibility="invisible"/>
+
 </RelativeLayout>
