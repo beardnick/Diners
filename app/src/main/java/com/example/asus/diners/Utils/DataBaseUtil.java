@@ -21,6 +21,7 @@ import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.DownloadFileListener;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.QueryListener;
 
 /**
  * Created by asus on 2018/2/12.
@@ -107,13 +108,14 @@ public class DataBaseUtil{
             return;
         }
         BmobQuery<Type> typeQuery = new BmobQuery<>();
-        final BmobQuery<DishType> dishTypeQuery = new BmobQuery<>();
+        BmobQuery<Dish> query = new BmobQuery<>();
         typeQuery.addWhereEqualTo("name" , type);
         typeQuery.findObjects(new FindListener<Type>() {
             @Override
             public void done(List<Type> list, BmobException e) {
                 if(e == null){
                     if(list.size() > 0){
+                        BmobQuery<DishType> dishTypeQuery = new BmobQuery<>();
                             dishTypeQuery.addWhereEqualTo("type" , new BmobPointer(list.get(0)));
                             dishTypeQuery.include("dish");
                             dishTypeQuery.findObjects(new FindListener<DishType>() {
@@ -124,6 +126,8 @@ public class DataBaseUtil{
                                         for (DishType x: list
                                              ) {
                                             adapter.getList().add(x.getDish());
+                                            Log.d(TAG, "searchDishByType :" + x.getDish().getObjectId()
+                                                    + x.getDish().getName() + x.getDish().getTaste());
                                         }
                                         Log.d(TAG, "searchDishByType :查询成功 dish" +adapter.getList().size() );
                                     }else {
@@ -135,12 +139,10 @@ public class DataBaseUtil{
                     }
                     Log.d(TAG, "searchDishByType :查询成功 type" + list.size());
                 }else {
-
+                    Log.d(TAG, "searchDishByType :查询失败" + e.getMessage());
                 }
             }
         });
-
-
     }
 
     public static void searchDishByAttribute(String attribute , final DishAdapter adapter){

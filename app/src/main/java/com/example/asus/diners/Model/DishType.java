@@ -12,13 +12,12 @@ public class DishType extends BmobObject {
 
     //类型指代近期新品，健身轻餐等
 
-
     private Dish dish;
 
     private Type type;
 
-    public DishType(String tableName, Dish dish, Type type) {
-        super(tableName);
+    public DishType(Dish dish, Type type) {
+        super();
         this.dish = dish;
         this.type = type;
     }
