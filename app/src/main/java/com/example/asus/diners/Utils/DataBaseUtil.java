@@ -102,6 +102,10 @@ public class DataBaseUtil{
     }
 
     public static void searchDishByType(String type , final DishAdapter adapter){
+        if(type == null || adapter == null || adapter.getList() ==  null){
+            Log.d(TAG, "searchDishByType: type or adapter or list is null");
+            return;
+        }
         BmobQuery<Type> typeQuery = new BmobQuery<>();
         final BmobQuery<DishType> dishTypeQuery = new BmobQuery<>();
         typeQuery.addWhereEqualTo("name" , type);
@@ -116,7 +120,7 @@ public class DataBaseUtil{
                                 @Override
                                 public void done(List<DishType> list, BmobException e) {
                                     adapter.getList().clear();
-                                    if (e != null) {
+                                    if (e == null) {
                                         for (DishType x: list
                                              ) {
                                             adapter.getList().add(x.getDish());
@@ -140,6 +144,10 @@ public class DataBaseUtil{
     }
 
     public static void searchDishByAttribute(String attribute , final DishAdapter adapter){
+        if(attribute == null || adapter == null || adapter.getList() == null){
+            Log.d(TAG, "searchDishByAttribute: attribute or adapter or list is null");
+            return;
+        }
         BmobQuery<Dish> query = new BmobQuery<>();
         query.addWhereEqualTo("attribute" , attribute);
         query.findObjects(new FindListener<Dish>() {

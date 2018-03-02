@@ -1,5 +1,6 @@
 package com.example.asus.diners.View;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.asus.diners.MainActivity;
 import com.example.asus.diners.R;
 
 /**
@@ -46,7 +48,9 @@ public class DishAttributeAdapter extends RecyclerView.Adapter<DishAttributeAdap
         holder.attribute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "你点击了" + list[position], Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.ATTRIBUTE_ACTION);
+                intent.putExtra("attribute" , list[position]);
+                v.getContext().startActivity(intent);
             }
         });
     }

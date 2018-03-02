@@ -43,8 +43,11 @@ public class SearchActivity extends AppCompatActivity {
     public void receiveSearch(){
         Intent intent = getIntent();
         if(Intent.ACTION_SEARCH.equals(intent.getAction())){
-            String queryString = intent.getStringExtra(SearchManager.QUERY);
-            DataBaseUtil.searchDish(queryString , mAdapter);
+            DataBaseUtil.searchDish(intent.getStringExtra(SearchManager.QUERY) , mAdapter);
+        } else if(intent.getAction().equals(MainActivity.ATTRIBUTE_ACTION)){
+            DataBaseUtil.searchDishByAttribute(intent.getStringExtra("attribute") , mAdapter);
+        }else if(intent.getAction().equals(MainActivity.TYPE_ACTION)){
+            DataBaseUtil.searchDishByType(intent.getStringExtra("type") , mAdapter);
         }
     }
 }

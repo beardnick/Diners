@@ -2,13 +2,17 @@ package com.example.asus.diners;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.asus.diners.Model.Comment;
 import com.example.asus.diners.Model.Dish;
@@ -30,11 +34,21 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
+
+    public static final String TYPE_ACTION = "com.example.asus.diners.MainActivity.TYPE_ACTION";
+    public static final String ATTRIBUTE_ACTION = "com.example.asus.diners.MainActivity.ATTRIBUTE_ACTION";
 
     private final static String TAG = "MainActivity";
     private SearchView mSearchView;
     private String[] dishAttributes = {"小吃" , "米饭套餐"  , "面食" , "粥汤" , "火锅"};
+
+    private Button breakfastBtn;
+    private Button lunchBtn;
+    private Button supperBtn;
+    private Button lighteatBtn;
+    private Button newProductsBtn;
+    private Button supportBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +95,40 @@ public class MainActivity extends AppCompatActivity {
     private void onBindView(){
         mSearchView = (SearchView) findViewById(R.id.search);
         SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        breakfastBtn = (Button) findViewById(R.id.breakfast);
+        lunchBtn = (Button) findViewById(R.id.lunch);
+        supperBtn = (Button) findViewById(R.id.supper);
+        lighteatBtn = (Button) findViewById(R.id.lighteat);
+        newProductsBtn = (Button) findViewById(R.id.newproducts);
+        supportBtn = (Button) findViewById(R.id.support);
+//        breakfastBtn.setOnClickListener(this);
+//        lunchBtn.setOnClickListener(this);
+//        supperBtn .setOnClickListener(this);
+//        lighteatBtn.setOnClickListener(this);
+//        newProductsBtn.setOnClickListener(this);
+//        supportBtn.setOnClickListener(this);
         mSearchView.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
         mSearchView.setSubmitButtonEnabled(true);
+        onBindButtons();
     }
+
+    private void onBindButtons(){
+        final Button[] typeBtns = new Button[6];
+        int[] btnIds = {R.id.breakfast , R.id.lunch , R.id.supper , R.id.newproducts , R.id.support , R.id.lighteat};
+        for (int i = 0; i < typeBtns.length; i++) {
+             typeBtns[i] = (Button) findViewById(btnIds[i]);
+             final String text = typeBtns[i].getText().toString();
+             typeBtns[i].setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     Intent intent = new Intent(TYPE_ACTION);
+                     intent.putExtra("type" ,text );
+                     startActivity(intent);
+                 }
+             });
+        }
+    }
+
+
+
 }
