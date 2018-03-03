@@ -1,5 +1,8 @@
 package com.example.asus.diners;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -9,18 +12,23 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.example.asus.diners.Fragment.CommentFragment;
 import com.example.asus.diners.Fragment.DetailFragment;
 import com.example.asus.diners.Fragment.PlaceFragment;
+import com.example.asus.diners.Model.Comment;
 import com.example.asus.diners.Model.Dish;
 import com.example.asus.diners.Utils.DataBaseUtil;
 import com.example.asus.diners.View.ViewPagerAdapter;
 
 import java.util.ArrayList;
 
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
 import devlight.io.library.ntb.NavigationTabBar;
 
 public class DishActivity extends AppCompatActivity {
@@ -134,11 +142,59 @@ public class DishActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_comment:
-                Toast.makeText(this, "添加评论", Toast.LENGTH_SHORT).show();
+                addCommentDialog();
                 break;
             default:
                 break;
         }
         return true;
+    }
+
+    private void addCommentDialog(){
+        AlertDialog.Builder addComment = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.add_comment_layout, null);
+        final RatingBar score = (RatingBar) view.findViewById(R.id.add_score);
+        final EditText comment = (EditText) view.findViewById(R.id.comment_text);
+        addComment.setView(view);
+        addComment.setTitle("添加评论");
+        addComment.setPositiveButton("确定" , null);
+        addComment.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        final AlertDialog addCommentDialog = addComment.create();
+        addCommentDialog.show();
+        addCommentDialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StringBuilder warnString = new StringBuilder();
+                if(comment.getText().length() == 0){
+                    warnString.append("请输入评价");
+                }
+                if(score.getRating() == 0){
+                    if(warnString.length() > 0)warnString.append(",");
+                    warnString.append("请打分");
+                }
+                if(warnString.length() > 0){
+                    Toast.makeText(DishActivity.this, warnString, Toast.LENGTH_SHORT).show();
+                }else {
+                    Comment newComment = new Comment(dish, comment.getText().toString());
+                    newComment.setScore(score.getRating());
+                    newComment.save(new SaveListener<String>() {
+                        @Override
+                        public void done(String s, BmobException e) {
+                            if (e == null) {
+                                Log.d(TAG, "addComment :添加成功");
+                            } else {
+                                Log.d(TAG, "addComment :" + e.getMessage());
+                            }
+                        }
+                    });
+                    addCommentDialog.dismiss();
+                }
+            }
+        });
     }
 }

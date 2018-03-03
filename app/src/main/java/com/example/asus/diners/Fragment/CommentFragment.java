@@ -84,11 +84,19 @@ public class CommentFragment extends Fragment {
         });
     }
 
-    private void notFoundAction(){
+    public void notFoundAction(){
         if(adapter.getList().size() == 0){
             noComment.setVisibility(View.VISIBLE);
         }else {
             noComment.setVisibility(View.INVISIBLE);
         }
+    }
+
+    public CommentAdapter getAdapter() {
+        return adapter;
+    }
+
+    public void setAdapter(CommentAdapter adapter) {
+        this.adapter = adapter;
     }
 }
