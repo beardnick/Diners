@@ -1,7 +1,9 @@
 package com.example.asus.diners.View;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +19,23 @@ import java.util.ArrayList;
  * Created by asus on 2018/3/3.
  */
 
-public class WebViewAdapter extends PagerAdapter {
+public class ArticleAdapter extends PagerAdapter {
 
+    private static final String TAG = "ArticleAdapter";
     ArrayList<String> list;
+    private Context context;
 
-    public WebViewAdapter(ArrayList<String> list) {
+    public ArrayList<String> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<String> list) {
         this.list = list;
+    }
+
+    public ArticleAdapter(ArrayList<String> list , Context context) {
+        this.list = list;
+        this.context = context;
     }
 
     @Override
@@ -37,13 +50,16 @@ public class WebViewAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View view = LayoutInflater.from(container.getContext())
-                .inflate(R.layout.article_layout , container , false);
+        View view = LayoutInflater.from(context)
+                .inflate(R.layout.article_layout , null , false);
         WebView article = (WebView) view.findViewById(R.id.article);
-        article.getSettings().setJavaScriptEnabled(true);
+        article.getSettings().setUseWideViewPort(true);
+        article.getSettings().setLoadWithOverviewMode(true);
         article.setWebViewClient(new WebViewClient());
+        Log.i(TAG, "instantiateItem: " + list.get(position));
         article.loadUrl(list.get(position));
-        return article;
+        container.addView(view);
+        return view;
     }
 
     @Override

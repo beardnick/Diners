@@ -130,7 +130,6 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     private void onCreateArticle(){
-        randomArticle.getSettings().setJavaScriptEnabled(true);
         randomArticle.setWebViewClient(new WebViewClient());
         randomArticle.getSettings().setUseWideViewPort(true);
         randomArticle.getSettings().setLoadWithOverviewMode(true);
@@ -141,7 +140,8 @@ public class MainActivity extends AppCompatActivity  {
                 try {
                     if(array.length() > 0){
                         Log.i(TAG, "Json信息 :" + array.getJSONObject(0).getString("url"));
-                        randomArticle.loadUrl(array.getJSONObject(0).getString("url"));
+                        Random random = new Random();
+                        randomArticle.loadUrl(array.getJSONObject(random.nextInt() % array.length()).getString("url"));
                     }
                     else Log.i(TAG , "array.length <= 0");
                 } catch (JSONException e1) {
@@ -152,7 +152,8 @@ public class MainActivity extends AppCompatActivity  {
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this , ArticleActivity.class);
+                startActivity(intent);
             }
         });
     }
