@@ -35,7 +35,7 @@ public class DataBaseUtil{
         if(dish.getPic() == null)return;
         String path = imageView.getContext().getApplicationContext()
                 .getCacheDir()+"/bmob/" + dish.getPic().getFilename();
-        Log.d(TAG, "getImage: 路径 = " + path);
+        Log.i(TAG, "getImage: 路径 = " + path);
         if(getImage(path) != null){
             imageView.setImageBitmap(getImage(path));
             dish.setImagePath(path);
@@ -105,7 +105,7 @@ public class DataBaseUtil{
 
     public static void searchDishByType(String type , final DishAdapter adapter){
         if(type == null || adapter == null || adapter.getList() ==  null){
-            Log.d(TAG, "searchDishByType: type or adapter or list is null");
+            Log.i(TAG, "searchDishByType: type or adapter or list is null");
             return;
         }
         BmobQuery<Type> typeQuery = new BmobQuery<>();
@@ -127,20 +127,20 @@ public class DataBaseUtil{
                                         for (DishType x: list
                                              ) {
                                             adapter.getList().add(x.getDish());
-                                            Log.d(TAG, "searchDishByType :" + x.getDish().getObjectId()
+                                            Log.i(TAG, "searchDishByType :" + x.getDish().getObjectId()
                                                     + x.getDish().getName() + x.getDish().getTaste());
                                         }
-                                        Log.d(TAG, "searchDishByType :查询成功 dish" +adapter.getList().size() );
+                                        Log.i(TAG, "searchDishByType :查询成功 dish" +adapter.getList().size() );
                                     }else {
-                                        Log.d(TAG, "searchDishByType :查询失败" + e.getMessage());
+                                        Log.i(TAG, "searchDishByType :查询失败" + e.getMessage());
                                     }
                                     adapter.notifyDataSetChanged();
                                 }
                             });
                     }
-                    Log.d(TAG, "searchDishByType :查询成功 type" + list.size());
+                    Log.i(TAG, "searchDishByType :查询成功 type" + list.size());
                 }else {
-                    Log.d(TAG, "searchDishByType :查询失败" + e.getMessage());
+                    Log.i(TAG, "searchDishByType :查询失败" + e.getMessage());
                 }
             }
         });
@@ -148,7 +148,7 @@ public class DataBaseUtil{
 
     public static void searchDishByAttribute(String attribute , final DishAdapter adapter){
         if(attribute == null || adapter == null || adapter.getList() == null){
-            Log.d(TAG, "searchDishByAttribute: attribute or adapter or list is null");
+            Log.i(TAG, "searchDishByAttribute: attribute or adapter or list is null");
             return;
         }
         BmobQuery<Dish> query = new BmobQuery<>();
@@ -159,9 +159,9 @@ public class DataBaseUtil{
                 adapter.getList().clear();
                 if(e == null){
                     adapter.getList().addAll(list);
-                    Log.d(TAG, "searchDishByAttribute :查询成功" + list.size());
+                    Log.i(TAG, "searchDishByAttribute :查询成功" + list.size());
                 }else {
-                    Log.d(TAG, "searchDishByAttribute :查询失败" + e.getMessage());
+                    Log.i(TAG, "searchDishByAttribute :查询失败" + e.getMessage());
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -180,12 +180,12 @@ public class DataBaseUtil{
                         adapter.getList().clear();
                     if(e == null){
                         adapter.getList().addAll(list);
-                        Log.d(TAG, "searchDishPlace :查询成功" + list.size());
+                        Log.i(TAG, "searchDishPlace :查询成功" + list.size());
                         if(list.size() > 0)
-                        Log.d(TAG, "searchDishPlace :查询成功" +
+                        Log.i(TAG, "searchDishPlace :查询成功" +
                                 list.get(0).getPlace().getName() + list.get(0).getDish().getName());
                     }else {
-                        Log.d(TAG, "searchDishPlace :查询失败" + e.getMessage());
+                        Log.i(TAG, "searchDishPlace :查询失败" + e.getMessage());
                     }
                     if(adapter.getList().size() != 0)
                         adapter.notifyDataSetChanged();
@@ -203,15 +203,15 @@ public class DataBaseUtil{
             @Override
             public void done(List<Comment> list, BmobException e) {
                     adapter.getList().clear();
-                Log.d(TAG, "searchComment: objectId: " + dish.getObjectId());
+                Log.i(TAG, "searchComment: objectId: " + dish.getObjectId());
                 if(list.size() > 0)
-                    Log.d(TAG, "searchComment: " +
+                    Log.i(TAG, "searchComment: " +
                 list.get(0).getContent() + list.get(0).getScore());
                 if(e == null){
                     adapter.getList().addAll(list);
-                    Log.d(TAG, "searchComment: 查询成功" +list.size() );
+                    Log.i(TAG, "searchComment: 查询成功" +list.size() );
                 }else {
-                    Log.d(TAG, "searchComment: 查询失败" + e.getMessage());
+                    Log.i(TAG, "searchComment: 查询失败" + e.getMessage());
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -225,7 +225,7 @@ public class DataBaseUtil{
         query.findObjects(new FindListener<Comment>() {
             @Override
             public void done(List<Comment> list, BmobException e) {
-                Log.d(TAG, "setScore: objectId: " + dish.getObjectId());
+                Log.i(TAG, "setScore: objectId: " + dish.getObjectId());
                 if(e == null){
                     if(list.size() == 0){
                         score.setRating(0);

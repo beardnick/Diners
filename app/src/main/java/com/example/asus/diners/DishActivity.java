@@ -126,7 +126,7 @@ public class DishActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: you have click on the come back button");
+                Log.i(TAG, "onClick: you have click on the come back button");
                 finish();
             }
         });
@@ -186,9 +186,9 @@ public class DishActivity extends AppCompatActivity {
                         @Override
                         public void done(String s, BmobException e) {
                             if (e == null) {
-                                Log.d(TAG, "addComment :添加成功");
+                                Log.i(TAG, "addComment :添加成功");
                             } else {
-                                Log.d(TAG, "addComment :" + e.getMessage());
+                                Log.i(TAG, "addComment :" + e.getMessage());
                             }
                         }
                     });

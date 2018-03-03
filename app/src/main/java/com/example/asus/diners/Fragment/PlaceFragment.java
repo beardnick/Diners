@@ -72,12 +72,12 @@ public class PlaceFragment extends Fragment {
                         adapter.getList().clear();
                     if(e == null){
                         adapter.getList().addAll(list);
-                        Log.d(TAG, "searchDishPlace :查询成功" + list.size());
+                        Log.i(TAG, "searchDishPlace :查询成功" + list.size());
                         if(list.size() > 0)
-                            Log.d(TAG, "searchDishPlace :查询成功" +
+                            Log.i(TAG, "searchDishPlace :查询成功" +
                                     list.get(0).getPlace().getName() + list.get(0).getDish().getName());
                     }else {
-                        Log.d(TAG, "searchDishPlace :查询失败" + e.getMessage());
+                        Log.i(TAG, "searchDishPlace :查询失败" + e.getMessage());
                     }
                         notFoundAction();
                         adapter.notifyDataSetChanged();

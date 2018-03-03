@@ -107,7 +107,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private void searchDishByType(String type){
         if(type == null || mAdapter == null || mAdapter.getList() ==  null){
-            Log.d(TAG, "searchDishByType: type or adapter or list is null");
+            Log.i(TAG, "searchDishByType: type or adapter or list is null");
             return;
         }
         BmobQuery<Type> typeQuery = new BmobQuery<>();
@@ -129,21 +129,21 @@ public class SearchActivity extends AppCompatActivity {
                                     for (DishType x: list
                                             ) {
                                         mAdapter.getList().add(x.getDish());
-                                        Log.d(TAG, "searchDishByType :" + x.getDish().getObjectId()
+                                        Log.i(TAG, "searchDishByType :" + x.getDish().getObjectId()
                                                 + x.getDish().getName() + x.getDish().getTaste());
                                     }
-                                    Log.d(TAG, "searchDishByType :查询成功 dish" +mAdapter.getList().size() );
+                                    Log.i(TAG, "searchDishByType :查询成功 dish" +mAdapter.getList().size() );
                                 }else {
-                                    Log.d(TAG, "searchDishByType :查询失败" + e.getMessage());
+                                    Log.i(TAG, "searchDishByType :查询失败" + e.getMessage());
                                 }
                                 notFoundAction();
                                 mAdapter.notifyDataSetChanged();
                             }
                         });
                     }
-                    Log.d(TAG, "searchDishByType :查询成功 type" + list.size());
+                    Log.i(TAG, "searchDishByType :查询成功 type" + list.size());
                 }else {
-                    Log.d(TAG, "searchDishByType :查询失败" + e.getMessage());
+                    Log.i(TAG, "searchDishByType :查询失败" + e.getMessage());
                 }
             }
         });
@@ -151,7 +151,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private void searchDishByAttribute(String attribute){
         if(attribute == null || mAdapter == null || mAdapter.getList() == null){
-            Log.d(TAG, "searchDishByAttribute: attribute or adapter or list is null");
+            Log.i(TAG, "searchDishByAttribute: attribute or adapter or list is null");
             return;
         }
         BmobQuery<Dish> query = new BmobQuery<>();
@@ -162,9 +162,9 @@ public class SearchActivity extends AppCompatActivity {
                 mAdapter.getList().clear();
                 if(e == null){
                     mAdapter.getList().addAll(list);
-                    Log.d(TAG, "searchDishByAttribute :查询成功" + list.size());
+                    Log.i(TAG, "searchDishByAttribute :查询成功" + list.size());
                 }else {
-                    Log.d(TAG, "searchDishByAttribute :查询失败" + e.getMessage());
+                    Log.i(TAG, "searchDishByAttribute :查询失败" + e.getMessage());
                 }
                 notFoundAction();
                 mAdapter.notifyDataSetChanged();

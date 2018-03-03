@@ -145,5 +145,27 @@
             />
     </GridLayout>
 
+    <Button
+        android:id="@+id/more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dish_type_button"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:text="更多"/>
+
+    <ScrollView
+        android:layout_below="@id/more"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <WebView
+            android:id="@+id/random_article"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </ScrollView>
+
+
+
 
 </RelativeLayout>

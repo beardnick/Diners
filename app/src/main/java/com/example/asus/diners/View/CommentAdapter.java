@@ -45,7 +45,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Comment comment = list.get(position);
-        Log.d(TAG, "onBindViewHolder: 星级" +comment.getScore() );
+        Log.i(TAG, "onBindViewHolder: 星级" +comment.getScore() );
         holder.score.setRating(comment.getScore());
         holder.content.setText(comment.getContent());
         holder.time.setText(comment.getCreatedAt());

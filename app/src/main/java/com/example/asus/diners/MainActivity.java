@@ -10,6 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -21,6 +24,10 @@ import com.example.asus.diners.Model.DishType;
 import com.example.asus.diners.Model.Place;
 import com.example.asus.diners.View.DishAttributeAdapter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -31,6 +38,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
@@ -41,14 +49,9 @@ public class MainActivity extends AppCompatActivity  {
 
     private final static String TAG = "MainActivity";
     private SearchView mSearchView;
-    private String[] dishAttributes = {"小吃" , "米饭套餐"  , "面食" , "粥汤" , "火锅"};
-
-    private Button breakfastBtn;
-    private Button lunchBtn;
-    private Button supperBtn;
-    private Button lighteatBtn;
-    private Button newProductsBtn;
-    private Button supportBtn;
+    private String[] dishAttributes = {"小吃", "米饭套餐", "面食", "粥汤", "火锅"};
+    private Button more;
+    private WebView randomArticle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,12 +98,8 @@ public class MainActivity extends AppCompatActivity  {
     private void onBindView(){
         mSearchView = (SearchView) findViewById(R.id.search);
         SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        breakfastBtn = (Button) findViewById(R.id.breakfast);
-        lunchBtn = (Button) findViewById(R.id.lunch);
-        supperBtn = (Button) findViewById(R.id.supper);
-        lighteatBtn = (Button) findViewById(R.id.lighteat);
-        newProductsBtn = (Button) findViewById(R.id.newproducts);
-        supportBtn = (Button) findViewById(R.id.support);
+        more = (Button) findViewById(R.id.more);
+        randomArticle = (WebView) findViewById(R.id.random_article);
 //        breakfastBtn.setOnClickListener(this);
 //        lunchBtn.setOnClickListener(this);
 //        supperBtn .setOnClickListener(this);
@@ -110,6 +109,7 @@ public class MainActivity extends AppCompatActivity  {
         mSearchView.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
         mSearchView.setSubmitButtonEnabled(true);
         onBindButtons();
+        onCreateArticle();
     }
 
     private void onBindButtons(){
@@ -127,6 +127,34 @@ public class MainActivity extends AppCompatActivity  {
                  }
              });
         }
+    }
+
+    private void onCreateArticle(){
+        randomArticle.getSettings().setJavaScriptEnabled(true);
+        randomArticle.setWebViewClient(new WebViewClient());
+        randomArticle.getSettings().setUseWideViewPort(true);
+        randomArticle.getSettings().setLoadWithOverviewMode(true);
+        BmobQuery query = new BmobQuery("_Article");
+        query.findObjectsByTable(new QueryListener<JSONArray>() {
+            @Override
+            public void done(JSONArray array, BmobException e) {
+                try {
+                    if(array.length() > 0){
+                        Log.i(TAG, "Json信息 :" + array.getJSONObject(0).getString("url"));
+                        randomArticle.loadUrl(array.getJSONObject(0).getString("url"));
+                    }
+                    else Log.i(TAG , "array.length <= 0");
+                } catch (JSONException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
 

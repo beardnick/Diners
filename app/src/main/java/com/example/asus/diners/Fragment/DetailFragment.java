@@ -49,14 +49,14 @@ public class DetailFragment extends Fragment {
 
     private void onInitData(){
         if(dish == null){
-            Log.d(TAG, "onInitData: dish为空");
+            Log.i(TAG, "onInitData: dish为空");
             return;
         }
         material.setText(dish.getMaterial());
         taste.setText(dish.getTaste());
         system.setText(dish.getSystem());
         calorie.setText(dish.getCalorie());
-        Log.d(TAG, "onInitData: " + dish.getName() + dish.getMaterial()
+        Log.i(TAG, "onInitData: " + dish.getName() + dish.getMaterial()
                 + dish.getTaste() + dish.getCalorie() + dish.getSystem());
     }
 

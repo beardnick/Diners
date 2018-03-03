@@ -68,15 +68,15 @@ public class CommentFragment extends Fragment {
             @Override
             public void done(List<Comment> list, BmobException e) {
                 adapter.getList().clear();
-                Log.d(TAG, "searchComment: objectId: " + dish.getObjectId());
+                Log.i(TAG, "searchComment: objectId: " + dish.getObjectId());
                 if(list.size() > 0)
-                    Log.d(TAG, "searchComment: " +
+                    Log.i(TAG, "searchComment: " +
                             list.get(0).getContent() + list.get(0).getScore());
                 if(e == null){
                     adapter.getList().addAll(list);
-                    Log.d(TAG, "searchComment: 查询成功" +list.size() );
+                    Log.i(TAG, "searchComment: 查询成功" +list.size() );
                 }else {
-                    Log.d(TAG, "searchComment: 查询失败" + e.getMessage());
+                    Log.i(TAG, "searchComment: 查询失败" + e.getMessage());
                 }
                 notFoundAction();
                 adapter.notifyDataSetChanged();

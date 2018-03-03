@@ -60,11 +60,11 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
                Intent intent = new Intent(v.getContext() , DishActivity.class);
 //               对象中不能有Bitmap，否则会报错
                intent.putExtra("dish" , (Parcelable) dish);
-               Log.d(TAG, "onClick: objectId: " + dish.getObjectId());
+               Log.i(TAG, "onClick: objectId: " + dish.getObjectId());
                //用Serializeable和Parcelable都不能将objectId传过去
 //               intent.putExtra("dish" , (Serializable) dish);
 //               intent.putExtra("dish_id" , dish.getObjectId());
-               Log.d(TAG, "onClick: " + dish.getName() + dish.getTaste() + dish.getMaterial() + dish.getCalorie() + dish.getSystem() );
+               Log.i(TAG, "onClick: " + dish.getName() + dish.getTaste() + dish.getMaterial() + dish.getCalorie() + dish.getSystem() );
                    v.getContext().startActivity(intent);
            }
        });
