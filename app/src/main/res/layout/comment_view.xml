@@ -12,7 +12,7 @@
     <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/text_height"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:text="yyyy:MM:dd"/>
 
@@ -20,7 +20,7 @@
         android:id="@+id/score"
         style="@style/Widget.AppCompat.RatingBar.Indicator"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/text_height"
+        android:layout_height="wrap_content"
         android:layout_below="@id/time"
         android:isIndicator="true"
         android:max="5"

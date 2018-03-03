@@ -44,12 +44,6 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder>{
         holder.placeName.setText(dishPlace.getPlace().getName());
     }
 
-//    @Override
-//    public void onBindViewHolder(ViewHolder holder, int position) {
-//        DishPlace place = list.get(position);
-//        holder.placeName.setText(place.getName());
-//        holder.cost.setText(place.getCost());
-//    }
 
     @Override
     public int getItemCount() {

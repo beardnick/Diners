@@ -11,4 +11,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <RelativeLayout
+        android:id="@+id/no_comment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/no_comment_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/nothing"/>
+
+        <TextView
+            android:id="@+id/no_comment_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_size"
+            android:text="还没有评论，快来抢沙发吧"
+            android:layout_below="@id/no_comment_image"
+            android:textColor="#cdcdcd"
+            />
+
+    </RelativeLayout>
+
+
 </FrameLayout>
