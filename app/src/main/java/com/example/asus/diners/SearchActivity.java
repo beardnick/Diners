@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -32,6 +33,7 @@ import cn.bmob.v3.listener.FindListener;
 
 public class SearchActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
+    private Toolbar toolbar1;
     private DishAdapter mAdapter = new DishAdapter(new ArrayList<Dish>());
     public static final String TAG = "SearchActivity";
 
@@ -43,9 +45,23 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dish_layout);
+        toolbar1 = (Toolbar) findViewById(R.id.dish_view_title_bar);
+        setSupportActionBar(toolbar1);
+        //onBindView();
+        onInitEvent1();
         createView();
         receiveSearch();
 
+    }
+
+    private void onInitEvent1(){
+        toolbar1.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v1) {
+                Log.i(TAG, "onClick: you have click on the come back button");
+                finish();
+            }
+        });
     }
 
     public void createView(){

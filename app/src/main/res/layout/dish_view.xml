@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.asus.diners.DishActivity"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/edge_margin"
     android:layout_marginEnd="@dimen/edge_margin"
     android:layout_marginTop="@dimen/item_margin"
@@ -9,11 +12,20 @@
     style="@style/cardStyle">
     <!--如果是height是match_parent的话，view将会充满整个RecyclerView ， 会很难看-->
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/dish_view_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+        />
+
     <ImageView
         android:id="@+id/dish_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:background="@mipmap/dish"/>
+        android:background="@mipmap/dish"
+        android:layout_below="@+id/dish_view_title_bar"/>
 
     <TextView
         android:id="@+id/name"
@@ -41,6 +53,7 @@
         android:rating="0"
         android:stepSize="0.1">
     </RatingBar>
+
 
 
 </RelativeLayout>

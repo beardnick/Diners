@@ -2,7 +2,9 @@ package com.example.asus.diners;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 
 import com.example.asus.diners.View.ArticleAdapter;
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
@@ -29,6 +31,7 @@ public class ArticleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_article);
         onBindView();
     }
+
 
     private void onBindView(){
         articleViewPager = (HorizontalInfiniteCycleViewPager) findViewById(R.id.article_viewpager);
