@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
 
     <!--<android.support.v7.widget.SearchView-->
         <!--android:id="@+id/search_dish"-->
@@ -22,13 +23,22 @@
             <!--android:layout_height="wrap_content"/>-->
     </android.support.v7.widget.RecyclerView>
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/dish_view_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+        />
+
     <ImageView
         android:id="@+id/not_found_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:src="@drawable/nothing"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        android:layout_below="@+id/dish_view_title_bar"/>
 
     <TextView
         android:id="@+id/not_found_text"
