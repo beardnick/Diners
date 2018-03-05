@@ -23,8 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/Dinner">
         <activity android:name=".MainActivity"
-                  android:label="食客"
-                  android:theme="@style/Dinner">
+            android:label="食客">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
