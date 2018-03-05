@@ -65,7 +65,7 @@ public class DishActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        toolbar.setTitle(dish.getName());
+        getSupportActionBar().setTitle(dish.getName());
         Log.i(TAG, "onBindView: 菜名" + dish.getName());
         // TODO: 2018/2/26 搞清楚为啥不能通过query得到对象
 //        BmobQuery<Dish> query = new BmobQuery<>();
