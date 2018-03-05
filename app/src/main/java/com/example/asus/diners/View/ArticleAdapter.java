@@ -51,7 +51,7 @@ public class ArticleAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.article_layout , null , false);
+                .inflate(R.layout.article_layout , container , false);
         WebView article = (WebView) view.findViewById(R.id.article);
         article.getSettings().setUseWideViewPort(true);
         article.getSettings().setLoadWithOverviewMode(true);

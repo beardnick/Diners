@@ -39,6 +39,7 @@ public class ArticleActivity extends AppCompatActivity {
 //        adapter.getList().add("http://bmob-cdn-16592.b0.upaiyun.com/2018/03/01/dec8c67940bdb75580c3e3bfccbe932e.html");
         articleViewPager.setAdapter(adapter);
         articleViewPager.setScrollDuration(500);
+//        articleViewPager.startAutoScroll(true);
         BmobQuery query = new BmobQuery("_Article");
         query.findObjectsByTable(new QueryListener<JSONArray>() {
             @Override

@@ -5,11 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.asus.diners.ArticleActivity">
+    tools:context="com.example.asus.diners.ArticleActivity"
+    android:background="@drawable/dinner">
 
     <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
         android:id="@+id/article_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        app:icvp_medium_scaled="true"
+        app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"/>
 
 </RelativeLayout>

@@ -133,20 +133,28 @@ public class MainActivity extends AppCompatActivity  {
         randomArticle.setWebViewClient(new WebViewClient());
         randomArticle.getSettings().setUseWideViewPort(true);
         randomArticle.getSettings().setLoadWithOverviewMode(true);
+        randomArticle.getSettings().setDomStorageEnabled(true);
+        randomArticle.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
         BmobQuery query = new BmobQuery("_Article");
         query.findObjectsByTable(new QueryListener<JSONArray>() {
             @Override
             public void done(JSONArray array, BmobException e) {
-                try {
-                    if(array.length() > 0){
-                        Log.i(TAG, "Json信息 :" + array.getJSONObject(0).getString("url"));
-                        Random random = new Random();
-                        randomArticle.loadUrl(array.getJSONObject(random.nextInt() % array.length()).getString("url"));
+                if(e == null){
+                    try {
+                        if(array.length() > 0){
+                            Random random = new Random();
+                            String temp =array.getJSONObject(Math.abs(random.nextInt() ) % array.length()).getString("url");
+                            Log.i(TAG, "url :" + temp );
+                            randomArticle.loadUrl(temp);
+                        }
+                        else Log.i(TAG , "array.length <= 0");
+                    } catch (JSONException e1) {
+                        e1.printStackTrace();
                     }
-                    else Log.i(TAG , "array.length <= 0");
-                } catch (JSONException e1) {
-                    e1.printStackTrace();
+                }else {
+                    Log.i(TAG, "查询素材失败 :" + e.getMessage());
                 }
+
             }
         });
         more.setOnClickListener(new View.OnClickListener() {
