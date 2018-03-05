@@ -15,8 +15,10 @@
         android:id="@+id/dish_view_title_bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
+        android:background="@color/crimson"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+        app:title="@string/app_name"
+        app:titleTextColor="@color/white"
         />
 
 
@@ -52,6 +54,13 @@
         android:textSize="@dimen/text_size"
         android:text="没找到哟 , 换个关键词再试试吧"
         android:textColor="#cdcdcd"
+        android:visibility="invisible"/>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:visibility="invisible"/>
 
 </RelativeLayout>

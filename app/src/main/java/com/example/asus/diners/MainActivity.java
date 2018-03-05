@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity  {
     private Button more;
     private WebView randomArticle;
     private ArrayList<String> urls;
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +113,8 @@ public class MainActivity extends AppCompatActivity  {
 //        supportBtn.setOnClickListener(this);
         mSearchView.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
         mSearchView.setSubmitButtonEnabled(true);
+        mToolbar = (Toolbar) findViewById(R.id.app_title);
+        setSupportActionBar(mToolbar);
         onBindButtons();
         onCreateArticle();
     }

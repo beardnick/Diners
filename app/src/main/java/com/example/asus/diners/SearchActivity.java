@@ -10,8 +10,10 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -39,6 +41,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private ImageView notFoundImage;
     private TextView notFoundText;
+    private ProgressBar mProgressBar;
 
 
     @Override
@@ -69,6 +72,7 @@ public class SearchActivity extends AppCompatActivity {
         LinearLayoutManager manager = new LinearLayoutManager(SearchActivity.this  );
         notFoundImage = (ImageView) findViewById(R.id.not_found_image);
         notFoundText = (TextView) findViewById(R.id.not_found_text);
+        mProgressBar = (ProgressBar) findViewById(R.id.progress);
 //        notFoundText.setVisibility(View.VISIBLE);
 //        notFoundImage.setVisibility(View.VISIBLE);
         mRecyclerView.setLayoutManager(manager);
@@ -76,12 +80,16 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void receiveSearch(){
+        mProgressBar.setVisibility(View.VISIBLE);
         Intent intent = getIntent();
         if(Intent.ACTION_SEARCH.equals(intent.getAction())){
+            toolbar1.setTitle(intent.getStringExtra(SearchManager.QUERY));
             searchDish(intent.getStringExtra(SearchManager.QUERY));
         } else if(Objects.equals(intent.getAction(), MainActivity.ATTRIBUTE_ACTION)){
+            toolbar1.setTitle(intent.getStringExtra("attribute"));
             searchDishByAttribute(intent.getStringExtra("attribute"));
         }else if(Objects.equals(intent.getAction(), MainActivity.TYPE_ACTION)){
+            toolbar1.setTitle(intent.getStringExtra("type"));
             searchDishByType(intent.getStringExtra("type"));
         }
     }
@@ -189,6 +197,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void notFoundAction(){
+        mProgressBar.setVisibility(View.INVISIBLE);
         if(mAdapter.getList().size() == 0){
             notFoundImage.setVisibility(View.VISIBLE);
             notFoundText.setVisibility(View.VISIBLE);
