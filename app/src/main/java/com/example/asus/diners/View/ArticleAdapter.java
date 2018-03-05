@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.example.asus.diners.R;
 
@@ -22,30 +23,21 @@ import java.util.ArrayList;
 public class ArticleAdapter extends PagerAdapter {
 
     private static final String TAG = "ArticleAdapter";
-    ArrayList<String> list;
+    private String[] list;
     private Context context;
-
-    public ArrayList<String> getList() {
-        return list;
-    }
-
-    public void setList(ArrayList<String> list) {
-        this.list = list;
-    }
-
-    public ArticleAdapter(ArrayList<String> list , Context context) {
+    public ArticleAdapter(String[] list , Context context) {
         this.list = list;
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return list.size();
+        return list.length;
     }
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view == object;
+        return view.equals(object);
     }
 
     @Override
@@ -56,8 +48,10 @@ public class ArticleAdapter extends PagerAdapter {
         article.getSettings().setUseWideViewPort(true);
         article.getSettings().setLoadWithOverviewMode(true);
         article.setWebViewClient(new WebViewClient());
-        Log.i(TAG, "instantiateItem: " + list.get(position));
-        article.loadUrl(list.get(position));
+        Log.i(TAG, "instantiateItem: " + list[position]);
+        article.loadUrl(list[position]);
+//        TextView url = (TextView) view.findViewById(R.id.url);
+//        url.setText(list.get(position));
         container.addView(view);
         return view;
     }

@@ -28,6 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity  {
     private String[] dishAttributes = {"小吃", "米饭套餐", "面食", "粥汤", "火锅"};
     private Button more;
     private WebView randomArticle;
+    private ArrayList<String> urls;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,7 @@ public class MainActivity extends AppCompatActivity  {
         .build();
         Bmob.initialize(config);
         onBindView();
+        onInitData();
     }
 
 //    private void initDishType(){
@@ -161,11 +164,37 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this , ArticleActivity.class);
+                intent.putExtra("urls"  , urls.toArray(new String[urls.size()]));
                 startActivity(intent);
             }
         });
+
     }
 
-
+    private void onInitData(){
+        urls = new ArrayList<>();
+        BmobQuery query = new BmobQuery("_Article");
+        query.findObjectsByTable(new QueryListener<JSONArray>() {
+            @Override
+            public void done(JSONArray array, BmobException e) {
+//                adapter.getList().clear();
+                if(e == null){
+                    for (int i = 0; i < array.length(); i++) {
+                        try {
+                            JSONObject x = array.getJSONObject(i);
+                            urls.add(x.getString("url"));
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                    Log.i(TAG, "done: 查询成功" + urls.size());
+                }else {
+                    Log.i(TAG, "done: " + e.getMessage());
+                }
+//                adapter.notifyDataSetChanged();
+//                articleViewPager.notifyDataSetChanged();
+            }
+        });
+    }
 
 }
