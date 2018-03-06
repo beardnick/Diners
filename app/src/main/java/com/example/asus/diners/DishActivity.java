@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -14,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
@@ -22,7 +25,10 @@ import com.example.asus.diners.Fragment.DetailFragment;
 import com.example.asus.diners.Fragment.PlaceFragment;
 import com.example.asus.diners.Model.Comment;
 import com.example.asus.diners.Model.Dish;
+import com.example.asus.diners.Model.DishPlace;
+import com.example.asus.diners.Model.Place;
 import com.example.asus.diners.Utils.DataBaseUtil;
+import com.example.asus.diners.View.ChoosePlaceAdapter;
 import com.example.asus.diners.View.ViewPagerAdapter;
 
 import java.util.ArrayList;
@@ -157,6 +163,23 @@ public class DishActivity extends AppCompatActivity {
         View view = getLayoutInflater().inflate(R.layout.add_comment_layout, null);
         final RatingBar score = (RatingBar) view.findViewById(R.id.add_score);
         final EditText comment = (EditText) view.findViewById(R.id.comment_text);
+        final RecyclerView places = (RecyclerView) view.findViewById(R.id.add_place);
+        places.setLayoutManager(new LinearLayoutManager(this));
+        ArrayList<Place> placeList = new ArrayList<>();
+        if(mPlaceFragment.getAdapter() == null){
+            Toast.makeText(this, "暂无销售，无法添加评论", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        for (DishPlace x : mPlaceFragment.getAdapter().getList()
+             ) {
+            placeList.add(x.getPlace());
+        }
+        if(placeList.size() == 0){
+            Toast.makeText(this, "暂无销售，无法添加评论", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        final ChoosePlaceAdapter adapter = new ChoosePlaceAdapter(placeList);
+        places.setAdapter(adapter);
         addComment.setView(view);
         addComment.setTitle("添加评论");
         addComment.setPositiveButton("确定" , null);
@@ -179,21 +202,29 @@ public class DishActivity extends AppCompatActivity {
                     if(warnString.length() > 0)warnString.append(",");
                     warnString.append("请打分");
                 }
+                if(adapter.getChoosedPlace().size() == 0){
+                    if(warnString.length() > 0)warnString.append(",");
+                    warnString.append("请选择商店");
+                }
                 if(warnString.length() > 0){
                     Toast.makeText(DishActivity.this, warnString, Toast.LENGTH_SHORT).show();
                 }else {
                     Comment newComment = new Comment(dish, comment.getText().toString());
                     newComment.setScore(score.getRating());
-                    newComment.save(new SaveListener<String>() {
-                        @Override
-                        public void done(String s, BmobException e) {
-                            if (e == null) {
-                                Log.i(TAG, "addComment :添加成功");
-                            } else {
-                                Log.i(TAG, "addComment :" + e.getMessage());
+                    for (Place x: adapter.getChoosedPlace()
+                         ) {
+                        newComment.setPlace(x);
+                        newComment.save(new SaveListener<String>() {
+                            @Override
+                            public void done(String s, BmobException e) {
+                                if (e == null) {
+                                    Log.i(TAG, "addComment :添加成功");
+                                } else {
+                                    Log.i(TAG, "addComment :" + e.getMessage());
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                     addCommentDialog.dismiss();
                 }
             }

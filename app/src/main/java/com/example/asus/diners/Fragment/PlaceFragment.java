@@ -44,6 +44,10 @@ public class PlaceFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public PlaceAdapter getAdapter() {
+        return adapter;
+    }
+
     private RecyclerView places;
 
 

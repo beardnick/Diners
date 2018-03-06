@@ -49,6 +49,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         holder.score.setRating(comment.getScore());
         holder.content.setText(comment.getContent());
         holder.time.setText(comment.getCreatedAt());
+        holder.place.setText(comment.getPlace().getName());
     }
 
     @Override
@@ -60,12 +61,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         public TextView time;
         public TextView content;
+        public TextView place;
         public RatingBar score;
         public ViewHolder(View itemView) {
             super(itemView);
             time = (TextView) itemView.findViewById(R.id.time);
             content = (TextView) itemView.findViewById(R.id.content);
             score = (RatingBar) itemView.findViewById(R.id.score);
+            place = (TextView) itemView.findViewById(R.id.place);
         }
     }
 }
