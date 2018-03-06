@@ -10,7 +10,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/dish_title_bar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="@dimen/toolbar_height"
         android:background="@color/crimson"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
         app:titleTextColor="@color/white"
@@ -25,30 +25,36 @@
         android:background="@mipmap/dish"
         android:layout_below="@id/dish_title_bar"/>
 
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/dish_big_image"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <devlight.io.library.ntb.NavigationTabBar
             android:id="@+id/dish_action_tab"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="50dp"
             app:ntb_bg_color="@color/crimson"
             app:ntb_active_color="@color/white"
             app:ntb_inactive_color="@color/white"
+            app:ntb_titled="true"
+            app:ntb_title_size="10sp"
+            app:ntb_title_mode="active"
+            app:ntb_icon_size_fraction="0.4"
             />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/dish_actions"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5"
+            android:layout_height="match_parent"
             />
 
     </LinearLayout>
+
+
 
 
 
