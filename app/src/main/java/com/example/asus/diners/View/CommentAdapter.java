@@ -49,6 +49,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         holder.score.setRating(comment.getScore());
         holder.content.setText(comment.getContent());
         holder.time.setText(comment.getCreatedAt());
+        if(comment.getPlace() != null)
         holder.place.setText(comment.getPlace().getName());
     }
 

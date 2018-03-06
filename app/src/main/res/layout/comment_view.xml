@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/time"
         android:layout_marginStart="@dimen/item_margin"
-        android:text="test"
+        android:text="null"
         android:textColor="@color/white"
         android:background="@drawable/text_bg"/>
 
