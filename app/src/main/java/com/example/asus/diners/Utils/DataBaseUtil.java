@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.example.asus.diners.Model.Comment;
 import com.example.asus.diners.Model.Dish;
@@ -218,7 +219,7 @@ public class DataBaseUtil{
         });
     }
 
-    public static void setScore(final Dish dish , final RatingBar score){
+    public static void setScore(final Dish dish , final RatingBar score , final TextView scoreText){
         BmobQuery<Comment> query = new BmobQuery<>();
         query.addQueryKeys("score");
         query.addWhereEqualTo("dish" , new BmobPointer(dish));
@@ -235,6 +236,7 @@ public class DataBaseUtil{
                             sum += x.getScore();
                         }
                         score.setRating(sum / list.size());
+                        scoreText.setText(String.valueOf(score.getRating()));
                     }
                     Log.v(TAG , "获取分数成功");
                 }else {

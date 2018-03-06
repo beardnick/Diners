@@ -53,7 +53,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
        holder.dishName.setText(dish.getName());
        DataBaseUtil.getImage(dish , holder.dishImage);
 //       holder.dishImage.setImageBitmap(DataBaseUtil.getImage(dish.getImagePath()));
-       DataBaseUtil.setScore(dish , holder.star);
+       DataBaseUtil.setScore(dish , holder.star , holder.score);
        holder.dishImage.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -80,12 +80,14 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
         ImageView dishImage;
         TextView dishName;
         RatingBar star;
+        TextView score;
 
         public ViewHolder(View itemView) {
             super(itemView);
             dishImage = (ImageView) itemView.findViewById(R.id.dish_image);
             dishName = (TextView) itemView.findViewById(R.id.name);
             star = (RatingBar) itemView.findViewById(R.id.star);
+            score = (TextView) itemView.findViewById(R.id.score_text);
         }
     }
 }

@@ -19,8 +19,9 @@
         android:stepSize="1"/>
 
     <android.support.v7.widget.RecyclerView
+        style="@style/cardStyle"
         android:id="@+id/add_place"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:layout_below="@id/add_score"/>
 </RelativeLayout>

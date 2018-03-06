@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -62,12 +63,12 @@ public class ChoosePlaceAdapter extends RecyclerView.Adapter<ChoosePlaceAdapter.
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView place;
-        public RadioButton choose;
+        public CheckBox choose;
 
         public ViewHolder(View itemView) {
             super(itemView);
            place = (TextView) itemView.findViewById(R.id.add_place_name);
-            choose = (RadioButton) itemView.findViewById(R.id.comment_it);
+            choose = (CheckBox) itemView.findViewById(R.id.comment_it);
         }
     }
 }

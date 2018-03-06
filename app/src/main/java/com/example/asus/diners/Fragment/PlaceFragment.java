@@ -76,6 +76,9 @@ public class PlaceFragment extends Fragment {
                         adapter.getList().clear();
                     if(e == null){
                         adapter.getList().addAll(list);
+                        for(DishPlace x : adapter.getList()){
+                            x.setDish(dish);
+                        }
                         Log.i(TAG, "searchDishPlace :查询成功" + list.size());
                         if(list.size() > 0)
                             Log.i(TAG, "searchDishPlace :查询成功" +

@@ -64,6 +64,7 @@ public class CommentFragment extends Fragment {
     private void searchComment(final Dish dish){
         BmobQuery<Comment> query = new BmobQuery<>();
         query.addWhereEqualTo("dish" , new BmobPointer(dish));
+        query.include("place");
         query.findObjects(new FindListener<Comment>() {
             @Override
             public void done(List<Comment> list, BmobException e) {
