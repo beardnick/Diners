@@ -11,7 +11,8 @@
         android:layout_height="@dimen/toolbar_height"
         android:background="@color/crimson"
         app:title=""
-        app:titleTextColor="@color/white">
+        app:titleTextColor="@color/white"
+        android:elevation="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -35,17 +36,19 @@
             android:id="@+id/pages"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/tab_layout"/>
+            android:layout_above="@id/tab_layout"
+            android:layout_below="@id/app_title"/>
 
     <LinearLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:elevation="10dp">
 
         <!--要包裹起来才显示title-->
         <devlight.io.library.ntb.NavigationTabBar
-            android:id="@+id/page_buttons"
+            android:id="@+id/page_tabs"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             app:ntb_bg_color="@color/crimson"

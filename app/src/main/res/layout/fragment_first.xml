@@ -4,10 +4,137 @@
     android:layout_height="match_parent"
     tools:context="com.example.asus.diners.Fragment.FirstFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/app_title"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/dish_attribute_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/search"
+            android:background="@color/crimson"/>
+
+        <GridLayout
+            android:id="@+id/dish_type_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:rowCount="2"
+            android:columnCount="3"
+            android:layout_below="@id/dish_attribute_button"
+            android:layout_centerHorizontal="true"
+            style="@style/cardStyle"
+            >
+
+            <Button
+                android:id="@+id/breakfast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="营养早餐"
+                android:drawableTop="@drawable/littlebreakfast1"
+                android:layout_columnWeight="1"
+                android:layout_row="0"
+                android:layout_column="0"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:textColor="@color/crimson"
+                />
+
+            <Button
+                android:id="@+id/lunch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="丰盛午餐"
+                android:drawableTop="@drawable/littlelunch1"
+                android:layout_columnWeight="1"
+                android:layout_row="0"
+                android:layout_column="1"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:textColor="@color/crimson"
+                />
+
+            <Button
+                android:id="@+id/supper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="温馨晚餐"
+                android:drawableTop="@drawable/littlesupper1"
+                android:layout_columnWeight="1"
+                android:layout_row="0"
+                android:layout_column="2"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:textColor="@color/crimson"
+                />
+
+            <Button
+                android:id="@+id/lighteat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="健身轻餐"
+                android:drawableTop="@drawable/lighteat"
+                android:layout_columnWeight="1"
+                android:layout_row="1"
+                android:layout_column="0"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:textColor="@color/crimson"
+                />
+
+            <Button
+                android:id="@+id/newproducts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="近期新品"
+                android:drawableTop="@drawable/newproducts"
+                android:layout_columnWeight="1"
+                android:layout_row="1"
+                android:layout_column="1"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:textColor="@color/crimson"
+                />
+
+            <Button
+                android:id="@+id/support"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="推荐"
+                android:drawableTop="@drawable/support"
+                android:layout_columnWeight="1"
+                android:layout_row="1"
+                android:layout_column="2"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:textColor="@color/crimson"
+                />
+        </GridLayout>
+
+        <Button
+            android:id="@+id/more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dish_type_button"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/btn_bg"
+            android:text="更多"
+            android:textColor="@color/white"/>
+
+        <ScrollView
+            android:layout_below="@id/more"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <WebView
+                android:id="@+id/random_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </ScrollView>
+
+    </RelativeLayout>
 
 </FrameLayout>

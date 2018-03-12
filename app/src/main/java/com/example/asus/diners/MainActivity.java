@@ -1,12 +1,10 @@
 package com.example.asus.diners;
 
-import android.app.SearchManager;
-import android.content.Context;
+import android.app.Fragment;
 import android.content.Intent;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,23 +13,18 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.example.asus.diners.Model.Comment;
-import com.example.asus.diners.Model.Dish;
-import com.example.asus.diners.Model.DishPlace;
-import com.example.asus.diners.Model.DishType;
-import com.example.asus.diners.Model.Place;
-import com.example.asus.diners.View.DishAttributeAdapter;
+import com.example.asus.diners.Fragment.CommunityFragment;
+import com.example.asus.diners.Fragment.FirstFragment;
+import com.example.asus.diners.Fragment.FootPrintFragment;
+import com.example.asus.diners.Fragment.MyFragment;
+import com.example.asus.diners.View.ViewPagerAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import cn.bmob.v3.Bmob;
@@ -40,12 +33,9 @@ import cn.bmob.v3.BmobInstallation;
 import cn.bmob.v3.BmobInstallationManager;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.InstallationListener;
-import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListener;
-import cn.bmob.v3.listener.SaveListener;
-import cn.bmob.v3.listener.UpdateListener;
+import devlight.io.library.ntb.NavigationTabBar;
 
 public class MainActivity extends AppCompatActivity  {
 
@@ -59,29 +49,36 @@ public class MainActivity extends AppCompatActivity  {
     private WebView randomArticle;
     private ArrayList<String> urls;
     private Toolbar mToolbar;
+    private NavigationTabBar pageTabs;
+    private ViewPager pages;
+    private FirstFragment firstFragment;
+    private MyFragment myFragment;
+    private FootPrintFragment footPrintFragment;
+    private CommunityFragment communityFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_layout);
-//        initDishattribute();
-        RecyclerView recyclerView=(RecyclerView)findViewById(R.id.dish_attribute_button);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        DishAttributeAdapter dishAttributeAdapter = new DishAttributeAdapter(dishAttributes);
-        recyclerView.setAdapter(dishAttributeAdapter);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        setContentView(R.layout.activity_main);
+        mToolbar = (Toolbar) findViewById(R.id.app_title);
+        setSupportActionBar(mToolbar);
+        onInitBmob();
+        onBindView();
+//        onInitData();
+    }
+
+    private void onInitBmob(){
         //第二：自v3.4.7版本开始,设置BmobConfig,允许设置请求超时时间、文件分片上传时每片的大小、文件的过期时间(单位为秒)，
         BmobConfig config =new BmobConfig.Builder(this)
-        //设置appkey
-        .setApplicationId("087b71a382e85618bd2622d8dfad9a58")
-        //请求超时时间（单位为秒）：默认15s
-        .setConnectTimeout(30)
-        //文件分片上传时每片的大小（单位字节），默认512*1024
-        .setUploadBlockSize(1024*1024)
-        //文件的过期时间(单位为秒)：默认1800s
-        .setFileExpiration(2500)
-        .build();
+                //设置appkey
+                .setApplicationId("087b71a382e85618bd2622d8dfad9a58")
+                //请求超时时间（单位为秒）：默认15s
+                .setConnectTimeout(30)
+                //文件分片上传时每片的大小（单位字节），默认512*1024
+                .setUploadBlockSize(1024*1024)
+                //文件的过期时间(单位为秒)：默认1800s
+                .setFileExpiration(2500)
+                .build();
         Bmob.initialize(config);
         BmobInstallationManager.getInstance().initialize(new InstallationListener<BmobInstallation>() {
             @Override
@@ -93,61 +90,90 @@ public class MainActivity extends AppCompatActivity  {
                 }
             }
         });
-        onBindView();
-        onInitData();
     }
-
-//    private void initDishType(){
-//        for(int i=0;i<7;i++){
-//            DishType nutritious_breakfast =new DishType("营养早餐",R.drawable.breakfast);
-//            dishTypeList.add(nutritious_breakfast);
-//            DishType great_lunch =new DishType("丰盛午餐",R.drawable.lunch);
-//            dishTypeList.add(great_lunch);
-//            DishType warm_dinner =new DishType("温馨晚餐",R.drawable.dinner);
-//            dishTypeList.add(warm_dinner);
-//        }
-//    }
-
-//    private void initDishattribute(){
-//        for(int i=0;i<5;i++)
-//
-//    }
 
     private void onBindView(){
-        mSearchView = (SearchView) findViewById(R.id.search);
-        SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        more = (Button) findViewById(R.id.more);
-        randomArticle = (WebView) findViewById(R.id.random_article);
-//        breakfastBtn.setOnClickListener(this);
-//        lunchBtn.setOnClickListener(this);
-//        supperBtn .setOnClickListener(this);
-//        lighteatBtn.setOnClickListener(this);
-//        newProductsBtn.setOnClickListener(this);
-//        supportBtn.setOnClickListener(this);
-        mSearchView.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
-        mSearchView.setSubmitButtonEnabled(true);
-        mToolbar = (Toolbar) findViewById(R.id.app_title);
-        setSupportActionBar(mToolbar);
-        onBindButtons();
-        onCreateArticle();
+        pageTabs = (NavigationTabBar) findViewById(R.id.page_tabs);
+        pages = (ViewPager) findViewById(R.id.pages);
+        ArrayList<android.support.v4.app.Fragment> list = new ArrayList<>();
+        firstFragment = new FirstFragment();
+        myFragment = new MyFragment();
+        footPrintFragment = new FootPrintFragment();
+        communityFragment = new CommunityFragment();
+        firstFragment.setAppCompatActivity(this);
+        myFragment.setAppCompatActivity(this);
+        footPrintFragment.setAppCompatActivity(this);
+        communityFragment.setAppCompatActivity(this);
+        list.add(firstFragment);
+        list.add(communityFragment);
+        list.add(footPrintFragment);
+        list.add(myFragment);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager() , list);
+        pages.setAdapter(adapter);
+        pages.setOffscreenPageLimit(2 );
+        final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
+        models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.drawable.ic_home_black_24dp) ,
+                        getResources().getColor(R.color.colorAccent)
+                ).title("首页")
+                        .badgeTitle("first_page")
+                        .build()
+        );
+        models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.drawable.ic_people_black_24dp) ,
+                        getResources().getColor(R.color.colorAccent)
+                ).title("社区")
+                        .badgeTitle("community")
+                        .build()
+        );
+        models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.drawable.ic_payment_black_24dp) ,
+                        getResources().getColor(R.color.colorAccent)
+                ).title("足迹")
+                        .badgeTitle("foot_print")
+                        .build()
+        );
+        models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.drawable.ic_account_circle_black_24dp) ,
+                        getResources().getColor(R.color.colorAccent)
+                ).title("我的")
+                        .badgeTitle("mine")
+                        .build()
+        );
+        pageTabs.setModels(models);
+        pageTabs.setViewPager(pages);
     }
-
-    private void onBindButtons(){
-        final Button[] typeBtns = new Button[6];
-        int[] btnIds = {R.id.breakfast , R.id.lunch , R.id.supper , R.id.newproducts , R.id.support , R.id.lighteat};
-        for (int i = 0; i < typeBtns.length; i++) {
-             typeBtns[i] = (Button) findViewById(btnIds[i]);
-             final String text = typeBtns[i].getText().toString();
-             typeBtns[i].setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View v) {
-                     Intent intent = new Intent(TYPE_ACTION);
-                     intent.putExtra("type" ,text );
-                     startActivity(intent);
-                 }
-             });
-        }
-    }
+//    private void onBindView(){
+//        RecyclerView recyclerView=(RecyclerView)findViewById(R.id.dish_attribute_button);
+//        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(layoutManager);
+//        DishAttributeAdapter dishAttributeAdapter = new DishAttributeAdapter(dishAttributes);
+//        recyclerView.setAdapter(dishAttributeAdapter);
+//        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//        mSearchView = (SearchView) findViewById(R.id.search);
+//        SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//        more = (Button) findViewById(R.id.more);
+//        randomArticle = (WebView) findViewById(R.id.random_article);
+//        mSearchView.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
+//        mSearchView.setSubmitButtonEnabled(true);
+//        mToolbar = (Toolbar) findViewById(R.id.app_title);
+//        setSupportActionBar(mToolbar);
+//        onBindButtons();
+//        onCreateArticle();
+//    }
+//
+//    private void onBindButtons(){
+//        final Button[] typeBtns = new Button[6];
+//        int[] btnIds = {R.id.breakfast , R.id.lunch , R.id.supper , R.id.newproducts , R.id.support , R.id.lighteat};
+//        for (int i = 0; i < typeBtns.length; i++) {
+//             typeBtns[i] = (Button) findViewById(btnIds[i]);
+//             final String text = typeBtns[i].getText().toString();
+//             typeBtns[i].setOnClickListener(new View.OnClickListener() {
+//                 @Override
+//                 public void onClick(View v) {
+//                     Intent intent = new Intent(TYPE_ACTION);
+//                     intent.putExtra("type" ,text );
+//                     startActivity(intent);
+//                 }
+//             });
+//        }
+//    }
 
     private void onCreateArticle(){
         randomArticle.setWebViewClient(new WebViewClient());
@@ -208,8 +234,6 @@ public class MainActivity extends AppCompatActivity  {
                 }else {
                     Log.i(TAG, "done: " + e.getMessage());
                 }
-//                adapter.notifyDataSetChanged();
-//                articleViewPager.notifyDataSetChanged();
             }
         });
     }
