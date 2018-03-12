@@ -36,7 +36,10 @@ import java.util.Random;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
+import cn.bmob.v3.BmobInstallation;
+import cn.bmob.v3.BmobInstallationManager;
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.InstallationListener;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
@@ -80,6 +83,16 @@ public class MainActivity extends AppCompatActivity  {
         .setFileExpiration(2500)
         .build();
         Bmob.initialize(config);
+        BmobInstallationManager.getInstance().initialize(new InstallationListener<BmobInstallation>() {
+            @Override
+            public void done(BmobInstallation bmobInstallation, BmobException e) {
+                if(e == null){
+                    Log.i(TAG, "注册成功" + bmobInstallation.getInstallationId());
+                }else {
+                    Log.i(TAG, "注册失败" + e.getMessage());
+                }
+            }
+        });
         onBindView();
         onInitData();
     }
