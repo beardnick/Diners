@@ -82,12 +82,13 @@ public class FirstFragment extends Fragment {
         DishAttributeAdapter dishAttributeAdapter = new DishAttributeAdapter(dishAttributes);
         recyclerView.setAdapter(dishAttributeAdapter);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        mSearchView = (SearchView) view.findViewById(R.id.search);
-        SearchManager manager = (SearchManager) appCompatActivity.getSystemService(Context.SEARCH_SERVICE);
+        // TODO: 2018/3/14 remove searchview
+//        mSearchView = (SearchView) view.findViewById(R.id.search);
+//        SearchManager manager = (SearchManager) appCompatActivity.getSystemService(Context.SEARCH_SERVICE);
         more = (Button) view.findViewById(R.id.more);
         randomArticle = (WebView) view.findViewById(R.id.random_article);
-        mSearchView.setSearchableInfo(manager.getSearchableInfo(appCompatActivity.getComponentName()));
-        mSearchView.setSubmitButtonEnabled(true);
+//        mSearchView.setSearchableInfo(manager.getSearchableInfo(appCompatActivity.getComponentName()));
+//        mSearchView.setSubmitButtonEnabled(true);
 //        mToolbar = (Toolbar) view.findViewById(R.id.app_title);
 //        appCompatActivity.setSupportActionBar(mToolbar);
         onBindButtons();
