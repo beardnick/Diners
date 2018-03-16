@@ -253,6 +253,11 @@ public class MainActivity extends AppCompatActivity  {
         searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         assert manager != null;
         searchView.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
+        searchView.setSubmitButtonEnabled(true);
+        SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete)
+                searchView.findViewById(R.id.search_src_text);
+        searchAutoComplete.setHintTextColor(Color.LTGRAY);
+        searchAutoComplete.setTextColor(Color.WHITE);
         return true;
     }
 
