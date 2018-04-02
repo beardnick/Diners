@@ -11,7 +11,8 @@
 
     <style name="Dinner" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorAccent">@color/crimson</item>
-        <item name="android:textColorSecondary">@android:color/white</item>
+        <!--secondary会影响到CheckBox和RatingBar等的边框显示-->
+        <item name="android:textColorSecondary">@android:color/darker_gray</item>
     </style>
 
 </resources>

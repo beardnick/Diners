@@ -5,140 +5,213 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/crimson">
+
+        <ImageView
+            android:id="@+id/head_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_account_box_white_48dp" />
+
         <TextView
+            android:id="@+id/mine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="我的"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size" />
+            android:layout_marginTop="@dimen/edge_margin"
+            android:text="账号:######"
+            android:textSize="25dp"
+            android:layout_toEndOf="@id/head_image"
+            android:textColor="@color/white" />
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+        <TextView
+            android:id="@+id/number"
+            android:layout_toEndOf="@id/head_image"
+            android:layout_below="@id/mine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手机号:######"
+            android:textColor="@color/white"
+            android:textSize="25dp"/>
 
 
-    <TextView
-        android:id="@+id/mine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/looklike"
-        android:drawablePadding="40dp"
-        android:text="账号:######"
-        android:textSize="25dp"
-        android:textColor="#000"/>
+    </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="手机号:######"
-        android:layout_gravity="center"
-        android:textColor="#000"
-        android:textSize="25dp"/>
+
+
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/crimson">
+
     <TextView
         android:id="@+id/wallet"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="#000"
+        android:layout_weight="1"
+        android:textColor="@color/white"
         android:text="钱包"
         android:padding="20dp"
         android:textSize="30dp"/>
 
     <TextView
         android:id="@+id/red_packet"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="红包"
         android:padding="20dp"
-        android:textColor="#000"
+        android:textColor="@color/white"
         android:textSize="30dp"
         />
 
         <TextView
             android:id="@+id/gold"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="#000"
+            android:layout_weight="1"
+            android:textColor="@color/white"
             android:text="金币"
             android:padding="20dp"
             android:textSize="30dp"/>
 
-    </LinearLayout>
+        </LinearLayout>
 
 
 
-    <TextView
-        android:id="@+id/address"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:drawableStart="@drawable/address"
-        android:text="收货地址"
-        android:drawablePadding="10dp"
-        android:padding="0dp"
-        android:textColor="#000"
-        android:textSize="20dp"/>
+        <GridLayout
+            android:layout_marginTop="@dimen/edge_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:rowCount="6"
+            android:columnCount="2"
+            >
 
-    <TextView
-        android:id="@+id/my_collection"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="我的收藏"
-        android:drawablePadding="10dp"
-        android:padding="-3dp"
-        android:drawableStart="@drawable/mycollection"
-        android:textColor="#000"
-        android:textSize="20dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/address"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_row="0"
+                android:layout_column="0"/>
 
-    <TextView
-        android:id="@+id/recommend_prize"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="推荐有奖"
-        android:drawablePadding="10dp"
-        android:padding="-3dp"
-        android:drawableStart="@drawable/recommendforprize"
-        android:textColor="#000"
-        android:textSize="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="收货地址"
+                android:textSize="@dimen/text_size"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_marginStart="@dimen/text_size"
+                android:layout_gravity="center_vertical"
+                android:layout_columnWeight="7" />
 
-    <TextView
-        android:id="@+id/shop_gold"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="金币商城"
-        android:drawablePadding="10dp"
-        android:padding="-3dp"
-        android:drawableStart="@drawable/shopforgold"
-        android:textColor="#000"
-        android:textSize="20dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mycollection"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_row="1"
+                android:layout_column="0"/>
 
-    <TextView
-        android:id="@+id/borrow"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="我要借贷"
-        android:drawablePadding="10dp"
-        android:padding="-3dp"
-        android:drawableStart="@drawable/borrow"
-        android:textColor="#000"
-        android:textSize="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的收藏"
+                android:textSize="@dimen/text_size"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:layout_marginStart="@dimen/text_size"
+                android:layout_gravity="center_vertical"
+                android:layout_columnWeight="7" />
 
-    <TextView
-        android:id="@+id/play_for_redpacket"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="玩游戏领红包"
-        android:drawablePadding="10dp"
-        android:padding="-3dp"
-        android:drawableStart="@drawable/playforredpacket"
-        android:textColor="#000"
-        android:textSize="20dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/recommendforprize"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_row="2"
+                android:layout_column="0"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="推荐有奖"
+                android:textSize="@dimen/text_size"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:layout_marginStart="@dimen/text_size"
+                android:layout_gravity="center_vertical"
+                android:layout_columnWeight="7" />
 
-</LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/shopforgold"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_row="3"
+                android:layout_column="0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="金币商城"
+                android:textSize="@dimen/text_size"
+                android:layout_row="3"
+                android:layout_column="1"
+                android:layout_marginStart="@dimen/text_size"
+                android:layout_gravity="center_vertical"
+                android:layout_columnWeight="7" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/borrow"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_row="4"
+                android:layout_column="0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我要借贷"
+                android:textSize="@dimen/text_size"
+                android:layout_row="4"
+                android:layout_column="1"
+                android:layout_marginStart="@dimen/text_size"
+                android:layout_gravity="center_vertical"
+                android:layout_columnWeight="7" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/playforredpacket"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_row="5"
+                android:layout_column="0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="玩游戏领红包"
+                android:textSize="@dimen/text_size"
+                android:layout_row="5"
+                android:layout_column="1"
+                android:layout_marginStart="@dimen/text_size"
+                android:layout_gravity="center_vertical"
+                android:layout_columnWeight="7" />
+
+        </GridLayout>
 
 </LinearLayout>
